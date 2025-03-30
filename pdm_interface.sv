@@ -6,22 +6,20 @@ module pdm_to_pcm(
 
   localparam int SAMPLING_RATE = 256;
   localparam int NUM_BITS = 8 // log2(256)
+  localparam int OVERSAMPLING_FACTOR = 4;
   
-  logic [SAMPLING_RATE-1:0] pdm_buffer;
-  logic [NUM_BITS-1:0] pdm_buffer_index;
-  logic [7:0] accumulator; 
+  logic [SAMPLING_RATE * OVERSAMPLING_FACTOR-1:0] pdm_buffer;
+  logic [10-1:0] pdm_buffer_index;
+  logic [10-1:0] accumulator; 
   
   always_ff @(posedge clk) begin
-    if (pdm_buffer_index = 8'b11111111) begin
-      pcm_out = pdm_buffer;
+    if (pdm_buffer_index = 8'b1111111111) begin
+      pcm_out = accumulator / 4;
       accumulator = 0;
     end
     else begin
       if (pdm_in) begin
         accumulator = accumulator + 1;
-      end
-      else begin
-        accumulator = 
       end
     end
   end
