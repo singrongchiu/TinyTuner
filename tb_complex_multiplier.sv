@@ -10,12 +10,13 @@ module RangeFinder_test();
   complex_t b;
   logic clk, rst_n, enable;
   complex_t result;
+  complex_t result_scaled; 
 
   complex_multiplier mymult(.*);
   
   initial begin
     rst_n = 1'b1;
-    enable = 1'b1;
+    enable = 1'b1; // this enable & reset does nothing
     clk = 1'b0;
     #1
     clk = 1'b1;
@@ -35,11 +36,11 @@ module RangeFinder_test();
       b.re = i + 2;
       b.im = i + 3;
       @(posedge clk)
-      @(posedge clk)
       
       $display("a: %d + %dj", i, i+1);
       $display("b: %d + %dj", i+2, i+3);
       $display("result: %d + %dj", result.re, result.im);
+      $display("result_scaled: %d + %dj", result_scaled.re, result_scaled.im);
       
     end
     
