@@ -47,11 +47,13 @@ EHXPLLL #(
 	);
 endmodule : slowerclk
 
-module pdm_to_pcm(
+module pdm_to_pcm#(
+  parameter DATA_WIDTH = 16,
+)(
   input clk,          // System clock - we are getting 5 MHz - will need 2.5 MHz
   input pdm_in,       // PDM microphone output
   input reset,
-  output logic [7:0] pcm_out, // 8-bit PCM output
+  output logic [DATA_WIDTH-1:0] pcm_out, // 8-bit PCM output
   output logic valid_out,
   output logic mic_clk,
   output logic clk_slower_fft
@@ -62,7 +64,7 @@ module pdm_to_pcm(
   
   // logic [SAMPLING_RATE-1:0] pdm_buffer;
   logic [9:0] pdm_buffer_index;
-  logic [9:0] accumulator; 
+  logic [DATA_WIDTH-1:0] accumulator; 
   
   always_ff @(posedge clk or posedge reset) begin
     if (reset) begin
@@ -72,7 +74,7 @@ module pdm_to_pcm(
       // $display("index1: %d", pdm_buffer_index);
     end
     else if (pdm_buffer_index == 1000) begin
-      pcm_out = (accumulator + pdm_in) >> 6;
+      pcm_out = (accumulator + pdm_in);
       accumulator = 0;
       valid_out = 1;
       pdm_buffer_index = 0;
@@ -101,7 +103,7 @@ endmodule : pdm_to_pcm
 
 
 module Radix2FFTPipeline8N #(
-    parameter DATA_WIDTH = 8,
+    parameter DATA_WIDTH = 16,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 8,
     localparam STAGES = $clog2(N)
@@ -383,6 +385,7 @@ module Radix2FFTPipeline8N #(
 //           $display(stage_real[STAGES]);
 //           $display(stage_imag[STAGES]);
           
+          // for (int i = 0; i < N; i++) begin
           for (int i = N-1; i >= 0; i--) begin
             current_magnitude = ((stage_real3[i])*(stage_real3[i])) + ((stage_imag3[i])*(stage_imag3[i]));
 //             $display("i: %d", i);
@@ -401,9 +404,9 @@ module Radix2FFTPipeline8N #(
               max_magnitude = current_magnitude;
             end
           end
-          highest_bin <= max_bin;
-          out_valid <= 1'b1;
-          max_magnitude <= 0;
+          highest_bin = max_bin;
+          out_valid = 1'b1;
+          max_magnitude = 0;
           /*
           $display("highest_bin: %d", max_bin);
           $display("highest_magnitude: %d", max_magnitude);
@@ -413,21 +416,21 @@ module Radix2FFTPipeline8N #(
           */
         end else begin
 //           $display(stage_valid);
-          out_valid <= 1'b0;
+          out_valid = 1'b0;
         end
     end
 
 endmodule : Radix2FFTPipeline8N 
 
 module bit_reverse #(
-    parameter DATA_WIDTH = 3 // Parameter for data width, change as needed
+    parameter BIN_WIDTH = 3 // Parameter for data width, change as needed
 ) (
-    input  logic [DATA_WIDTH-1:0] data_in,
-    output logic [DATA_WIDTH-1:0] data_out
+    input  logic [BIN_WIDTH-1:0] data_in,
+    output logic [BIN_WIDTH-1:0] data_out
 );
   
      always_comb begin
-       case (DATA_WIDTH)
+       case (BIN_WIDTH)
          3: data_out = {data_in[0], data_in[1], data_in[2]};
          // 4: data_out = {data_in[0], data_in[1], data_in[2], data_in[3]};
          // more if needed
@@ -497,6 +500,7 @@ module fft_top (
   output logic [7:0] led,
   output logic slowerclk
 );
+parameter DATA_WIDTH = 16;
 /*
   input clkin, // 25 MHz, 0 deg
   output clkout0, // 5 MHz, 0 deg
@@ -505,7 +509,7 @@ module fft_top (
 logic pllclkout;
 slowerclk myslowerclk(.clkin(clk), .clkout0(pllclkout), .locked());
 
-logic [7:0] pcm_out;
+logic [DATA_WIDTH-1:0] pcm_out;
 logic valid_out;
 logic mic_clk;
 logic clk_slower;
