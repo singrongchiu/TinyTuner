@@ -61,8 +61,8 @@ module pdm_to_pcm(
 //  localparam int NUM_BITS = 8; // max = 256
   
   // logic [SAMPLING_RATE-1:0] pdm_buffer;
-  logic [10:0] pdm_buffer_index;
-  logic [10:0] accumulator; 
+  logic [9:0] pdm_buffer_index;
+  logic [9:0] accumulator; 
   
   always_ff @(posedge clk or posedge reset) begin
     if (reset) begin
@@ -71,26 +71,21 @@ module pdm_to_pcm(
       // $display("RESET!!!!!!!!!!!!!!!!");
       // $display("index1: %d", pdm_buffer_index);
     end
-    else if (pdm_buffer_index[0]) begin
-     // do nothing
-      pdm_buffer_index = pdm_buffer_index + 1;
-      mic_clk = 0;
-    end
     else if (pdm_buffer_index === 1000) begin
       pcm_out = (accumulator + pdm_in) >> 4;
       accumulator = 0;
       valid_out = 1;
       pdm_buffer_index = 0;
-      clk_slower = 1;
+      clk_slower_fft = 1;
       // $display("AM AT MAX INDEX!!!!!!!!!!!!!!!!!!");
     end
     else begin
       if (pdm_buffer_index === 500) begin
-        clk_slower = 0;
+        clk_slower_fft = 0;
       end
-      mic_clk = 1;
       valid_out = 0;
       accumulator = accumulator + pdm_in;
+      mic_clk = ~mic_clk;
       // $display("index2: %d", pdm_buffer_index);
       pdm_buffer_index = pdm_buffer_index + 1;
     end
@@ -153,7 +148,7 @@ module Radix2FFTPipeline8N #(
 //           stage_valid[0] <= 0;
           mic_input_index <= 0;
           mic_inputting_array <= 0;
-        end else if (mic_input_index === N) begin
+        end else if (mic_input_index == N) begin
           stage_valid0 <= 1;
 //           $display("LC: STAGE SHOULD BE VALID!");
           mic_input_index <= 0;
@@ -224,8 +219,8 @@ module Radix2FFTPipeline8N #(
   logic signed [DATA_WIDTH-1:0] abdiff_imag0;
   logic signed [DATA_WIDTH-1:0] abdiff_imag1;
   logic signed [DATA_WIDTH-1:0] abdiff_imag2;
-    logic signed [DATA_WIDTH+TWIDDLE_WIDTH:0] prod_real[0:STAGES];
-    logic signed [DATA_WIDTH+TWIDDLE_WIDTH:0] prod_imag[0:STAGES];
+    logic signed [DATA_WIDTH+TWIDDLE_WIDTH:0] prod_real[STAGES-1:0];
+    logic signed [DATA_WIDTH+TWIDDLE_WIDTH:0] prod_imag[STAGES-1:0];
     logic signed [TWIDDLE_WIDTH-1:0] twiddle_real[N/2];
     logic signed [TWIDDLE_WIDTH-1:0] twiddle_imag[N/2];
     logic [STAGES-1:0] twiddle_index[0:STAGES];
@@ -330,13 +325,13 @@ module Radix2FFTPipeline8N #(
           end
     else if (stage_valid2) begin
       stage_valid3 <= 1;
-      for (int group = 0; group < (2**2); group++) begin : fft_group
-      for (int pair = 0; pair < N / (2**(2+1)); pair++) begin : fft_pair
+      for (int group = 0; group < (4); group++) begin : fft_group
+      for (int pair = 0; pair < N / (8); pair++) begin : fft_pair
 
                 // Calculate indices
         idx_a2 = group * (N >> 2) + pair;
-        idx_b2 = idx_a2 + (N >> (2+1));
-        twiddle_index[2] = pair * (2**2);
+        idx_b2 = idx_a2 + (N >> (3));
+        twiddle_index[2] = pair * (4);
 
                 // Read inputs
         a_real2 = stage_real2[idx_a2];
@@ -383,7 +378,7 @@ module Radix2FFTPipeline8N #(
 //           $display(stage_imag[STAGES]);
           
           for (int i = N-1; i > 0; i--) begin
-            current_magnitude = ((stage_real3[i])*(stage_real3[i])) + ((stage_imag2[i])*(stage_imag2[i]));
+            current_magnitude = ((stage_real3[i])*(stage_real3[i])) + ((stage_imag3[i])*(stage_imag3[i]));
 //             $display("i: %d", i);
 //             $display(stage_real[STAGES][i]);
 //             $display(stage_real[STAGES][i] >>> (DATA_WIDTH/4));
@@ -449,36 +444,37 @@ always_ff @(posedge clock) begin
   // output 0: ABCDEF
     sevseg = 7'b1111111;
   end
-  */
-  if (digit === 0) begin
+
+  if (digit == 0) begin
     // output 0: ABCDEF
     sevseg = 7'b0000001;
   end
-  else if (digit === 1) begin
+  */
+  if (digit == 3'b010) begin
     // output 1: BC
     sevseg = 7'b0110000;
   end
-  else if (digit === 2) begin
+  else if (digit == 3'b010) begin
     // output 2: ABGED
     sevseg = 7'b1101101;
   end
-  else if (digit === 3) begin
+  else if (digit == 3'b011) begin
     // output 3: ABGCD
     sevseg = 7'b1111001;
   end
-  else if (digit === 4) begin
+  else if (digit == 3'b100) begin
     // output 4: FGBC
     sevseg = 7'b0110011;
   end
-  else if (digit === 5) begin
+  else if (digit == 3'b101) begin
     // output 4: ACDFG
     sevseg = 7'b1011011;
   end
-  else if (digit === 6) begin
+  else if (digit == 3'b110) begin
     // output 4: ACDEFG
     sevseg = 7'b1011111;
   end
-  else if (digit === 7) begin
+  else if (digit == 3'b111) begin
     // output 4: ABC
     sevseg = 7'b1110000;
   end
@@ -492,7 +488,6 @@ module fft_top (
   input reset,
   output logic mic_clk,
   output logic [6:0] sevseg,
-  output logic [7:0] led
 );
 /*
   input clkin, // 25 MHz, 0 deg
@@ -537,16 +532,18 @@ logic [2:0] bitreversed_bin;
 */
 bit_reverse mybit_reverse(.data_in(highest_bin), .data_out(bitreversed_bin));
 
+/*
 always_ff @(posedge clk) begin
   led[0] = pcm_out[0];
   led[1] = pcm_out[1];
   led[2] = pcm_out[2];
   led[3] = pcm_out[3];
-  led[4] = highest_bin[0];
-  led[5] = highest_bin[1];
-  led[6] = highest_bin[2];
+  led[4] = bitreversed_bin[0];
+  led[5] = bitreversed_bin[1];
+  led[6] = bitreversed_bin[2];
   led[7] = clk_slower;
 end
+*/
 /*
   input logic [3:0] digit,
   input logic clock, reset,
