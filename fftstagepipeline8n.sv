@@ -1,4 +1,4 @@
-module Radix2FFTPipeline8N #(
+module Radix2FFTPipeline #(
     parameter DATA_WIDTH = 8,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 8,
@@ -96,99 +96,133 @@ module Radix2FFTPipeline8N #(
       twiddle_real[3] = -8'sd45; twiddle_imag[3] = -8'sd45;
     end
   
-    generate
-      for (genvar s = 0; s < STAGES; s++) begin : fft_stage
-//         always_ff @(posedge clk or negedge rst_n) begin
-//           if (!rst_n) begin
-//             stage_valid[s+1] <= 0;
-//           end else if (stage_valid[s]) begin
-// //             $display("stage 0 fft layer");
-// //             $display(stage_real[0]);
-// //             $display("stage 1 fft layer");
-// //             $display(stage_real[1]);
-//             stage_valid[s+1] <= 1;
-// //             $display("stage valid for %d", s);
-// //             $display(stage_real[0]);
-// //             $display("^ Stage Real!");
-//           end else begin
-// //             $display("stage NOT valid for %d", s);
-//             stage_valid[s+1] <= 0;
-//           end
-//         end
-        
+//     generate
+//       for (genvar s = 0; s < STAGES; s++) begin : fft_stage
+       
+  ///// STAGE 1
         // note, had to watch out for bit reversal
         always_ff @(posedge clk or negedge rst_n) begin
           if (!rst_n) begin
-            stage_valid[s+1] <= 0;
+            stage_valid[1] <= 0;
           end
-          else if (stage_valid[s]) begin
-//             $display("stage %d fft layer", s);
-//             $display(stage_real[s]);
-//             $display(stage_imag[s]);
-            stage_valid[s+1] <= 1;
+          else if (stage_valid[0]) begin
+            stage_valid[1] <= 1;
           end
           else begin
-            stage_valid[s+1] <= 0;
+            stage_valid[1] <= 0;
           end
-          for (int group = 0; group < (2**s); group++) begin : fft_group
-            for (int pair = 0; pair < N / (2**(s+1)); pair++) begin : fft_pair
+          for (int group = 0; group < (2**0); group++) begin : fft_group
+            for (int pair = 0; pair < N / (2**(0+1)); pair++) begin : fft_pair
 
                 // Calculate indices
-                idx_a[s] = group * (N >> s) + pair;
-                idx_b[s] = idx_a[s] + (N >> (s+1));
-                twiddle_index[s] = pair * (2**s);
-//                 $display("s %d, idx_a %d", s, idx_a[s]); 
-//                 $display("s %d, idx_b %d", s, idx_b[s]); 
-//                 $display("s %d twiddle_index %d", s, twiddle_index[s]);
-//               $display(stage_real[0]);
+              idx_a[0] = group * (N >> 0) + pair;
+              idx_b[0] = idx_a[0] + (N >> (0+1));
+              twiddle_index[0] = pair * (2**0);
 
                 // Read inputs
-                a_real[s] = stage_real[s][idx_a[s]];
-                a_imag[s] = stage_imag[s][idx_a[s]];
-                b_real[s] = stage_real[s][idx_b[s]];
-                b_imag[s] = stage_imag[s][idx_b[s]];
-                abdiff_real[s] = stage_real[s][idx_a[s]] - stage_real[s][idx_b[s]];
-                abdiff_imag[s] = stage_imag[s][idx_a[s]] - stage_imag[s][idx_b[s]];
-//                 a_real[s] = stage_real[s][group * (2**(s+1)) + pair];
-//                 a_imag[s] = stage_imag[s][group * (2**(s+1)) + pair];
-//                 b_real[s] = stage_real[s][group * (2**(s+1)) + pair + (2**s)];
-//                 b_imag[s] = stage_imag[s][group * (2**(s+1)) + pair + (2**s)];
+              a_real[0] = stage_real[0][idx_a[0]];
+              a_imag[0] = stage_imag[0][idx_a[0]];
+              b_real[0] = stage_real[0][idx_b[0]];
+              b_imag[0] = stage_imag[0][idx_b[0]];
+              abdiff_real[0] = stage_real[0][idx_a[0]] - stage_real[0][idx_b[0]];
+              abdiff_imag[0] = stage_imag[0][idx_a[0]] - stage_imag[0][idx_b[0]];
 
-                // Twiddle multiply
-//                 prod_real[s] = (b_real[s] * twiddle_real[twiddle_index[s]] - b_imag[s] * twiddle_imag[twiddle_index[s]]) >>> (TWIDDLE_WIDTH - 1);
-//                 prod_imag[s] = (b_real[s] * twiddle_imag[twiddle_index[s]] + b_imag[s] * twiddle_real[twiddle_index[s]]) >>> (TWIDDLE_WIDTH - 1);
-//               prod_real[s] = (b_real[s] * twiddle_real[twiddle_index[s]] - b_imag[s] * twiddle_imag[twiddle_index[s]]);
-//               prod_imag[s] = (b_real[s] * twiddle_imag[twiddle_index[s]] + b_imag[s] * twiddle_real[twiddle_index[s]]);
-              
-//               prod_real[s] = (abdiff_real[s] * twiddle_real[twiddle_index[s]] - abdiff_imag[s] * twiddle_imag[twiddle_index[s]]);
-//               prod_imag[s] = (abdiff_real[s] * twiddle_imag[twiddle_index[s]] + abdiff_imag[s] * twiddle_real[twiddle_index[s]]);
-              prod_real[s] = (abdiff_real[s] * twiddle_real[twiddle_index[s]] - abdiff_imag[s] * twiddle_imag[twiddle_index[s]]) >>> (TWIDDLE_WIDTH - 2);
-              prod_imag[s] = (abdiff_real[s] * twiddle_imag[twiddle_index[s]] + abdiff_imag[s] * twiddle_real[twiddle_index[s]]) >>> (TWIDDLE_WIDTH - 2);
-//               $display("s %d b_real %d", s, b_real[s]);
-//               $display("s %d a_real %d", s, a_real[s]);
-//               $display("s %d b_imag %d", s, b_imag[s]);
-//               $display("s %d a_imag %d", s, a_imag[s]);
-//               $display("s %d twiddle_real[index] %d", s, twiddle_real[twiddle_index[s]]);
-//               $display("s %d twiddle_imag[index] %d", s, twiddle_imag[twiddle_index[s]]);
-              //               $display("s %d prod_real %d", s, prod_real[s]);
-//               $display("s %d prod_imag %d", s, prod_imag[s]);
+              prod_real[0] = (abdiff_real[0] * twiddle_real[twiddle_index[0]] - abdiff_imag[0] * twiddle_imag[twiddle_index[0]]) >>> (TWIDDLE_WIDTH - 2);
+              prod_imag[0] = (abdiff_real[0] * twiddle_imag[twiddle_index[0]] + abdiff_imag[0] * twiddle_real[twiddle_index[0]]) >>> (TWIDDLE_WIDTH - 2);
 
                 // Butterfly
-              stage_real[s+1][idx_a[s]] <= (a_real[s] + b_real[s]) >>> 1;
-              stage_imag[s+1][idx_a[s]] <= (a_imag[s] + b_imag[s]) >>> 1;
-              stage_real[s+1][idx_b[s]] <= (prod_real[s]) >>> 1;
-              stage_imag[s+1][idx_b[s]] <= (prod_imag[s]) >>> 1;
-//               stage_real[s+1][group * (2**(s+1)) + pair] <= a_real[s][group] + prod_real[s];
-//               stage_imag[s+1][group * (2**(s+1)) + pair] <= a_imag[s][group] + prod_imag[s];
-//               stage_real[s+1][group * (2**(s+1)) + pair + (2**s)] <= a_real[s][group] - prod_real[s];
-//               stage_imag[s+1][group * (2**(s+1)) + pair + (2**s)] <= a_imag[s][group] - prod_imag[s];
+              stage_real[1][idx_a[0]] <= (a_real[0] + b_real[0]) >>> 1;
+              stage_imag[1][idx_a[0]] <= (a_imag[0] + b_imag[0]) >>> 1;
+              stage_real[1][idx_b[0]] <= (prod_real[0]) >>> 1;
+              stage_imag[1][idx_b[0]] <= (prod_imag[0]) >>> 1;
             end
           end
         end
-      end
-    endgenerate
+//       end
+//     endgenerate
+  
+  ////// STAGE 2
+      always_ff @(posedge clk or negedge rst_n) begin
+          if (!rst_n) begin
+            stage_valid[2] <= 0;
+          end
+        else if (stage_valid[1]) begin
+            //             $display("stage %d fft layer", 2);
+//             $display(stage_real[s]);
+//             $display(stage_imag[s]);
+          stage_valid[2] <= 1;
+          end
+          else begin
+            stage_valid[2] <= 0;
+          end
+        for (int group = 0; group < (2**1); group++) begin : fft_group
+          for (int pair = 0; pair < N / (2**(1+1)); pair++) begin : fft_pair
 
-    logic [STAGES-1:0] max_bin;
+                // Calculate indices
+            idx_a[1] = group * (N >> 1) + pair;
+            idx_b[1] = idx_a[1] + (N >> (1+1));
+            twiddle_index[1] = pair * (2**1);
+
+                // Read inputs
+            a_real[1] = stage_real[1][idx_a[1]];
+            a_imag[1] = stage_imag[1][idx_a[1]];
+            b_real[1] = stage_real[1][idx_b[1]];
+            b_imag[1] = stage_imag[1][idx_b[1]];
+            abdiff_real[1] = stage_real[1][idx_a[1]] - stage_real[1][idx_b[1]];
+            abdiff_imag[1] = stage_imag[1][idx_a[1]] - stage_imag[1][idx_b[1]];
+
+            prod_real[1] = (abdiff_real[1] * twiddle_real[twiddle_index[1]] - abdiff_imag[1] * twiddle_imag[twiddle_index[1]]) >>> (TWIDDLE_WIDTH - 2);
+            prod_imag[1] = (abdiff_real[1] * twiddle_imag[twiddle_index[1]] + abdiff_imag[1] * twiddle_real[twiddle_index[1]]) >>> (TWIDDLE_WIDTH - 2);
+
+                // Butterfly
+            stage_real[2][idx_a[1]] <= (a_real[1] + b_real[1]) >>> 1;
+            stage_imag[2][idx_a[1]] <= (a_imag[1] + b_imag[1]) >>> 1;
+            stage_real[2][idx_b[1]] <= (prod_real[1]) >>> 1;
+            stage_imag[2][idx_b[1]] <= (prod_imag[1]) >>> 1;
+            end
+          end
+        end
+  
+  ////// STAGE 3
+  always_ff @(posedge clk or negedge rst_n) begin
+          if (!rst_n) begin
+            stage_valid[3] <= 0;
+          end
+    else if (stage_valid[2]) begin
+      stage_valid[3] <= 1;
+          end
+          else begin
+            stage_valid[3] <= 0;
+          end
+    for (int group = 0; group < (2**2); group++) begin : fft_group
+      for (int pair = 0; pair < N / (2**(2+1)); pair++) begin : fft_pair
+
+                // Calculate indices
+        idx_a[2] = group * (N >> 2) + pair;
+        idx_b[2] = idx_a[2] + (N >> (2+1));
+        twiddle_index[2] = pair * (2**2);
+
+                // Read inputs
+        a_real[2] = stage_real[2][idx_a[2]];
+        a_imag[2] = stage_imag[2][idx_a[2]];
+        b_real[2] = stage_real[2][idx_b[2]];
+        b_imag[2] = stage_imag[2][idx_b[2]];
+        abdiff_real[2] = stage_real[2][idx_a[2]] - stage_real[2][idx_b[2]];
+        abdiff_imag[2] = stage_imag[2][idx_a[2]] - stage_imag[2][idx_b[2]];
+
+        prod_real[2] = (abdiff_real[2] * twiddle_real[twiddle_index[2]] - abdiff_imag[2] * twiddle_imag[twiddle_index[2]]) >>> (TWIDDLE_WIDTH - 2);
+        prod_imag[2] = (abdiff_real[2] * twiddle_imag[twiddle_index[2]] + abdiff_imag[2] * twiddle_real[twiddle_index[2]]) >>> (TWIDDLE_WIDTH - 2);
+
+                // Butterfly
+        stage_real[3][idx_a[2]] <= (a_real[2] + b_real[2]) >>> 1;
+        stage_imag[3][idx_a[2]] <= (a_imag[2] + b_imag[2]) >>> 1;
+        stage_real[3][idx_b[2]] <= (prod_real[2]) >>> 1;
+        stage_imag[3][idx_b[2]] <= (prod_imag[2]) >>> 1;
+            end
+          end
+     end
+
+  logic [STAGES-1:0] max_bin;
   logic signed [DATA_WIDTH*2:0] max_magnitude;
   logic signed [DATA_WIDTH*2:0] current_magnitude;
     
