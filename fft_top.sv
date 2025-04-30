@@ -72,7 +72,7 @@ module pdm_to_pcm(
       // $display("index1: %d", pdm_buffer_index);
     end
     else if (pdm_buffer_index == 1000) begin
-      pcm_out = (accumulator + pdm_in) >> 4;
+      pcm_out = (accumulator + pdm_in) >> 6;
       accumulator = 0;
       valid_out = 1;
       pdm_buffer_index = 0;
@@ -383,7 +383,7 @@ module Radix2FFTPipeline8N #(
 //           $display(stage_real[STAGES]);
 //           $display(stage_imag[STAGES]);
           
-          for (int i = N-1; i > 0; i--) begin
+          for (int i = N-1; i >= 0; i--) begin
             current_magnitude = ((stage_real3[i])*(stage_real3[i])) + ((stage_imag3[i])*(stage_imag3[i]));
 //             $display("i: %d", i);
 //             $display(stage_real[STAGES][i]);
@@ -451,13 +451,12 @@ always_ff @(posedge clock) begin
   // output 0: ABCDEF
     sevseg = 7'b1111111;
   end
-
+*/
   if (digit == 0) begin
     // output 0: ABCDEF
-    sevseg = 7'b0000001;
+    sevseg = 7'b1111110;
   end
-  */
-  if (digit == 3'b010) begin
+  else if (digit == 3'b010) begin
     // output 1: BC
     sevseg = 7'b0110000;
   end
@@ -495,7 +494,8 @@ module fft_top (
   input reset,
   output logic mic_clk,
   output logic [6:0] sevseg,
-  output logic [7:0] led
+  output logic [7:0] led,
+  output logic slowerclk
 );
 /*
   input clkin, // 25 MHz, 0 deg
@@ -509,6 +509,7 @@ logic [7:0] pcm_out;
 logic valid_out;
 logic mic_clk;
 logic clk_slower;
+assign slowerclk = clk_slower;
 /*
   input clk,          // System clock - we are getting 5 MHz - will need 2.5 MHz
   input pdm_in,       // PDM microphone output
@@ -546,10 +547,10 @@ always_ff @(posedge clk) begin
   led[1] = pcm_out[1];
   led[2] = pcm_out[2];
   led[3] = pcm_out[3];
-  led[4] = bitreversed_bin[0];
-  led[5] = bitreversed_bin[1];
-  led[6] = bitreversed_bin[2];
-  led[7] = clk_slower;
+  led[4] = pcm_out[4];
+  led[5] = pcm_out[5];
+  led[6] = pcm_out[6];
+  led[7] = pcm_out[7];
 end
 
 /*

@@ -59,6 +59,9 @@ IOBUF  PORT "mic_clk" PULLMODE=UP IO_TYPE=LVCMOS33 DRIVE=4;
 LOCATE COMP "pdm_in" SITE "M17";
 IOBUF  PORT "pdm_in" PULLMODE=UP IO_TYPE=LVCMOS33 DRIVE=4;
 
+## slower clk
+LOCATE COMP "slowerclk" SITE "E14";
+IOBUF PORT  "slowerclk" PULLMODE=UP IO_TYPE=LVCMOS33 DRIVE=4;
 
 ### Hint: Inputs look like the following 2 lines:
 # LOCATE COMP "PORT_NAME" SITE "PIN_NUM";
