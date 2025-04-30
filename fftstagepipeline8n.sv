@@ -1,4 +1,4 @@
-module Radix2FFTPipeline #(
+module Radix2FFTPipeline8N #(
     parameter DATA_WIDTH = 8,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 8,
@@ -57,8 +57,14 @@ module Radix2FFTPipeline #(
 //           $display("LC: STAGE SHOULD BE VALID!");
           mic_input_index <= 0;
           mic_inputting_array <= ~mic_inputting_array;
-          stage_real0 <= (mic_inputting_array)? mic_input_real1 : mic_input_real0;
-          stage_imag0 <= (mic_inputting_array)? mic_input_imag1 : mic_input_imag0;
+          if (mic_inputting_array) begin
+            stage_real0 <= mic_input_real1;
+            stage_imag0 <= mic_input_imag1;
+          end
+          else begin
+            stage_real0 <= mic_input_real0;
+            stage_imag0 <= mic_input_imag0;
+          end
 //           $display("mic input 0");
 //           $display(mic_input_real[0]);
 //           $display("mic input 1");
