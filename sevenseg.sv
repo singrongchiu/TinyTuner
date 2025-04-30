@@ -9,11 +9,11 @@ module sevenseg
 always_ff @(posedge clock or negedge rst_n) begin
   if (!rst_n) begin
   // output 0: ABCDEF
-    sevseg = 7'b1111110;
+    sevseg = 7'b1111111;
   end
   else if (digit == 0) begin
     // output 0: ABCDEF
-    sevseg = 7'b1111110;
+    sevseg = 7'b0000000;
   end
   else if (digit == 1) begin
     // output 1: BC

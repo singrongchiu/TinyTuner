@@ -1,18 +1,68 @@
+// Code your design here
+
+// diamond 3.7 accepts this PLL
+// diamond 3.8-3.9 is untested
+// diamond 3.10 or higher is likely to abort with error about unable to use feedback signal
+// cause of this could be from wrong CPHASE/FPHASE parameters
+module slowerclk
+(
+    input clkin, // 25 MHz, 0 deg
+    output clkout0, // 5 MHz, 0 deg
+    output locked
+);
+(* FREQUENCY_PIN_CLKI="25" *)
+(* FREQUENCY_PIN_CLKOP="5" *)
+(* ICP_CURRENT="12" *) (* LPF_RESISTOR="8" *) (* MFG_ENABLE_FILTEROPAMP="1" *) (* MFG_GMCREF_SEL="2" *)
+EHXPLLL #(
+        .PLLRST_ENA("DISABLED"),
+        .INTFB_WAKE("DISABLED"),
+        .STDBY_ENABLE("DISABLED"),
+        .DPHASE_SOURCE("DISABLED"),
+        .OUTDIVIDER_MUXA("DIVA"),
+        .OUTDIVIDER_MUXB("DIVB"),
+        .OUTDIVIDER_MUXC("DIVC"),
+        .OUTDIVIDER_MUXD("DIVD"),
+        .CLKI_DIV(5),
+        .CLKOP_ENABLE("ENABLED"),
+        .CLKOP_DIV(120),
+        .CLKOP_CPHASE(60),
+        .CLKOP_FPHASE(0),
+        .FEEDBK_PATH("CLKOP"),
+        .CLKFB_DIV(1)
+    ) pll_i (
+        .RST(1'b0),
+        .STDBY(1'b0),
+        .CLKI(clkin),
+        .CLKOP(clkout0),
+        .CLKFB(clkout0),
+        .CLKINTFB(),
+        .PHASESEL0(1'b0),
+        .PHASESEL1(1'b0),
+        .PHASEDIR(1'b1),
+        .PHASESTEP(1'b1),
+        .PHASELOADREG(1'b1),
+        .PLLWAKESYNC(1'b0),
+        .ENCLKOP(1'b0),
+        .LOCK(locked)
+	);
+endmodule : slowerclk
+
 module pdm_to_pcm(
-  input clk,          // System clock
+  input clk,          // System clock - we are getting 5 MHz - will need 2.5 MHz
   input pdm_in,       // PDM microphone output
   input rst_n,
   output logic [7:0] pcm_out, // 8-bit PCM output
   output logic valid_out,
-  output logic clk_slower
+  output logic mic_clk,
+  output logic clk_slower_fft
 );
 
-  localparam int SAMPLING_RATE = 5000;
+  localparam int SAMPLING_RATE = 500;
 //  localparam int NUM_BITS = 8; // max = 256
   
   // logic [SAMPLING_RATE-1:0] pdm_buffer;
-  logic [14:0] pdm_buffer_index;
-  logic [14:0] accumulator; 
+  logic [10:0] pdm_buffer_index;
+  logic [10:0] accumulator; 
   
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -21,8 +71,13 @@ module pdm_to_pcm(
       // $display("RESET!!!!!!!!!!!!!!!!");
       // $display("index1: %d", pdm_buffer_index);
     end
-    else if (pdm_buffer_index == 5000) begin
-      pcm_out = (accumulator + pdm_in) >> 5;
+    else if (pdm_buffer_index[0]) begin
+     // do nothing
+      pdm_buffer_index = pdm_buffer_index + 1;
+      mic_clk = 0;
+    end
+    else if (pdm_buffer_index == 1000) begin
+      pcm_out = (accumulator + pdm_in) >> 6;
       accumulator = 0;
       valid_out = 1;
       pdm_buffer_index = 0;
@@ -30,17 +85,19 @@ module pdm_to_pcm(
       // $display("AM AT MAX INDEX!!!!!!!!!!!!!!!!!!");
     end
     else begin
-      accumulator = accumulator + pdm_in;
+      mic_clk = 1;
       valid_out = 0;
+      accumulator = accumulator + pdm_in;
       // $display("index2: %d", pdm_buffer_index);
       pdm_buffer_index = pdm_buffer_index + 1;
-      if (pdm_buffer_index == 2500) begin
+      if (pdm_buffer_index == 500) begin
         clk_slower <= 0;
       end
     end
   end
   
 endmodule : pdm_to_pcm
+
 
 module Radix2FFTPipeline8N #(
     parameter DATA_WIDTH = 8,
@@ -433,21 +490,31 @@ module fft_top (
   input clk,          // System clock
   input pdm_in,       // PDM microphone output
   input rst_n,
+  output mic_clk,
   output logic [6:0] sevseg
 );
+/*
+  input clkin, // 25 MHz, 0 deg
+  output clkout0, // 5 MHz, 0 deg
+  output locked
+*/
+logic pllclkout;
+slowerclk myslowerclk(.clkin(clk), .clkout0(pllclkout), .locked());
 
 logic [7:0] pcm_out;
 logic valid_out;
+logic mic_clk;
 logic clk_slower;
 /*
-  input clk,          // System clock
+  input clk,          // System clock - we are getting 5 MHz - will need 2.5 MHz
   input pdm_in,       // PDM microphone output
   input rst_n,
   output logic [7:0] pcm_out, // 8-bit PCM output
   output logic valid_out,
-  output logic clk_slower
+  output logic mic_clk,
+  output logic clk_slower_fft
 */
-pdm_to_pcm my_pdm_to_cdm(.clk(clk), .pdm_in(pdm_in), .rst_n(rst_n), .pcm_out(pcm_out), .valid_out(valid_out), .clk_slower(clk_slower));
+pdm_to_pcm my_pdm_to_cdm(.clk(pllclkout), .pdm_in(pdm_in), .rst_n(rst_n), .pcm_out(pcm_out), .valid_out(valid_out), .mic_clk(mic_clk), .clk_slower_fft(clk_slower));
 
 logic out_valid;
 logic [2:0] highest_bin;
