@@ -552,6 +552,7 @@ module sevenseg
 // ABCDEFG
 // 0123456
 
+logic [7:0] arbitrary_counter;
 always_ff @(posedge clock) begin
 /*
   if (reset) begin
@@ -559,37 +560,48 @@ always_ff @(posedge clock) begin
     sevseg = 7'b1111111;
   end
 */
-  if (digit == 0) begin
+  if (arbitrary_counter[7]==0) begin
+    arbitrary_counter = arbitrary_counter + 1;
+  end
+  else if (digit == 0) begin
     // output 0: ABCDEF
     sevseg = 7'b1111110;
+    arbitrary_counter = arbitrary_counter + 1;
   end
   else if (digit == 3'b010) begin
     // output 1: BC
     sevseg = 7'b0110000;
+    arbitrary_counter = arbitrary_counter + 1;
   end
   else if (digit == 3'b010) begin
     // output 2: ABGED
     sevseg = 7'b1101101;
+    arbitrary_counter = arbitrary_counter + 1;
   end
   else if (digit == 3'b011) begin
     // output 3: ABGCD
     sevseg = 7'b1111001;
+    arbitrary_counter = arbitrary_counter + 1;
   end
   else if (digit == 3'b100) begin
     // output 4: FGBC
     sevseg = 7'b0110011;
+    arbitrary_counter = arbitrary_counter + 1;
   end
   else if (digit == 3'b101) begin
     // output 4: ACDFG
     sevseg = 7'b1011011;
+    arbitrary_counter = arbitrary_counter + 1;
   end
   else if (digit == 3'b110) begin
     // output 4: ACDEFG
     sevseg = 7'b1011111;
+    arbitrary_counter = arbitrary_counter + 1;
   end
   else if (digit == 3'b111) begin
     // output 4: ABC
     sevseg = 7'b1110000;
+    arbitrary_counter = arbitrary_counter + 1;
   end
 end
 
