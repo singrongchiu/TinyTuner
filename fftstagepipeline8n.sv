@@ -31,8 +31,12 @@ module Radix2FFTPipeline #(
   logic signed [DATA_WIDTH-1:0] stage_imag2 [N-1:0];
   logic signed [DATA_WIDTH-1:0] stage_imag3 [N-1:0];
   
-    logic signed [DATA_WIDTH-1:0] mic_input_real[2][N-1:0];
-    logic signed [DATA_WIDTH-1:0] mic_input_imag[2][N-1:0];
+//     logic signed [DATA_WIDTH-1:0] mic_input_real[2][N-1:0];
+//     logic signed [DATA_WIDTH-1:0] mic_input_imag[2][N-1:0];
+  logic signed [DATA_WIDTH-1:0] mic_input_real0[N-1:0];
+  logic signed [DATA_WIDTH-1:0] mic_input_real1[N-1:0];
+  logic signed [DATA_WIDTH-1:0] mic_input_imag0[N-1:0];
+  logic signed [DATA_WIDTH-1:0] mic_input_imag1[N-1:0];
     logic stage_valid0;
   logic stage_valid1;
   logic stage_valid2;
@@ -53,16 +57,21 @@ module Radix2FFTPipeline #(
 //           $display("LC: STAGE SHOULD BE VALID!");
           mic_input_index <= 0;
           mic_inputting_array <= ~mic_inputting_array;
-          stage_real0 <= (mic_inputting_array)? mic_input_real[1] : mic_input_real[0];
-          stage_imag0 <= (mic_inputting_array)? mic_input_imag[1] : mic_input_imag[0];
+          stage_real0 <= (mic_inputting_array)? mic_input_real1 : mic_input_real0;
+          stage_imag0 <= (mic_inputting_array)? mic_input_imag1 : mic_input_imag0;
 //           $display("mic input 0");
 //           $display(mic_input_real[0]);
 //           $display("mic input 1");
 //           $display(mic_input_real[1]);
           // $display(stage_real);
         end else if (in_valid) begin
-          mic_input_real[mic_inputting_array][mic_input_index] <= in_real;
-          mic_input_imag[mic_inputting_array][mic_input_index] <= in_imag;
+          if (mic_inputting_array) begin
+            mic_input_real1[mic_input_index] <= in_real;
+            mic_input_imag1[mic_input_index] <= in_imag;
+          end else begin
+            mic_input_real0[mic_input_index] <= in_real;
+            mic_input_imag0[mic_input_index] <= in_imag;
+          end
           mic_input_index <= mic_input_index + 1;
 //           $display("inputted one!");
         end
