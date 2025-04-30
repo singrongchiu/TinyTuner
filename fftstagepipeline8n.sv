@@ -302,11 +302,11 @@ module Radix2FFTPipeline #(
           end
           highest_bin <= max_bin;
           out_valid <= 1'b1;
-          $display("highest_bin: %d", max_bin);
-          $display("highest_magnitude: %d", max_magnitude);
-          $display("stage 3! fft layer");
-          $display(stage_real3);
-          $display(stage_imag3);
+//           $display("highest_bin: %d", max_bin);
+//           $display("highest_magnitude: %d", max_magnitude);
+//           $display("stage 3! fft layer");
+//           $display(stage_real3);
+//           $display(stage_imag3);
         end else begin
 //           $display(stage_valid);
           out_valid <= 1'b0;
