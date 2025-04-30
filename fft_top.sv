@@ -241,13 +241,13 @@ module Radix2FFTPipeline8N #(
           end
           else if (stage_valid0) begin
             stage_valid1 <= 1;
-            for (int group = 0; group < (2**0); group++) begin : fft_group
-            for (int pair = 0; pair < N / (2**(0+1)); pair++) begin : fft_pair
+            for (int group = 0; group < (1); group++) begin : fft_group
+            for (int pair = 0; pair < 4; pair++) begin : fft_pair
 
                 // Calculate indices
-              idx_a0 = group * (N >> 0) + pair;
+              idx_a0 = group << 3 + pair;
               idx_b0 = idx_a0 + (N >> (0+1));
-              twiddle_index[0] = pair * (2**0);
+              twiddle_index[0] = pair;
 
                 // Read inputs
               a_real0 = stage_real0[idx_a0];
@@ -289,7 +289,7 @@ module Radix2FFTPipeline8N #(
           for (int pair = 0; pair < N / (2**(1+1)); pair++) begin : fft_pair
 
                 // Calculate indices
-            idx_a1 = group * (N >> 1) + pair;
+            idx_a1 = group << 2 + pair;
             idx_b1 = idx_a1 + (N >> (1+1));
             twiddle_index[1] = pair * (2**1);
 
@@ -329,7 +329,7 @@ module Radix2FFTPipeline8N #(
       for (int pair = 0; pair < N / (8); pair++) begin : fft_pair
 
                 // Calculate indices
-        idx_a2 = group * (N >> 2) + pair;
+        idx_a2 = group << 1 + pair;
         idx_b2 = idx_a2 + (N >> (3));
         twiddle_index[2] = pair * (4);
 
@@ -397,6 +397,7 @@ module Radix2FFTPipeline8N #(
           end
           highest_bin <= max_bin;
           out_valid <= 1'b1;
+          max_magnitude <= 0;
           /*
           $display("highest_bin: %d", max_bin);
           $display("highest_magnitude: %d", max_magnitude);
@@ -422,9 +423,9 @@ module bit_reverse #(
      always_comb begin
        case (DATA_WIDTH)
          3: data_out = {data_in[0], data_in[1], data_in[2]};
-         4: data_out = {data_in[0], data_in[1], data_in[2], data_in[3]};
+         // 4: data_out = {data_in[0], data_in[1], data_in[2], data_in[3]};
          // more if needed
-         default: data_out = data_in;
+         // default: data_out = data_in;
        endcase
      end
 
