@@ -77,22 +77,22 @@ module pdm_to_pcm(
       mic_clk = 0;
     end
     else if (pdm_buffer_index == 1000) begin
-      pcm_out = (accumulator + pdm_in) >> 6;
+      pcm_out = (accumulator + pdm_in) >> 4;
       accumulator = 0;
       valid_out = 1;
       pdm_buffer_index = 0;
-      clk_slower <= 1;
+      clk_slower = 1;
       // $display("AM AT MAX INDEX!!!!!!!!!!!!!!!!!!");
     end
     else begin
+      if (pdm_buffer_index == 500) begin
+        clk_slower = 0;
+      end
       mic_clk = 1;
       valid_out = 0;
       accumulator = accumulator + pdm_in;
       // $display("index2: %d", pdm_buffer_index);
       pdm_buffer_index = pdm_buffer_index + 1;
-      if (pdm_buffer_index == 500) begin
-        clk_slower <= 0;
-      end
     end
   end
   
@@ -490,8 +490,9 @@ module fft_top (
   input clk,          // System clock
   input pdm_in,       // PDM microphone output
   input rst_n,
-  output mic_clk,
-  output logic [6:0] sevseg
+  output logic mic_clk,
+  output logic [6:0] sevseg,
+  output logic [7:0] led
 );
 /*
   input clkin, // 25 MHz, 0 deg
@@ -536,6 +537,16 @@ logic [2:0] bitreversed_bin;
 */
 bit_reverse mybit_reverse(.data_in(highest_bin), .data_out(bitreversed_bin));
 
+always_ff @(posedge clk) begin
+  led[0] = pcm_out[0];
+  led[1] = pcm_out[1];
+  led[2] = pcm_out[2];
+  led[3] = pcm_out[3];
+  led[4] = pcm_out[4];
+  led[5] = pcm_out[5];
+  led[6] = pcm_out[6];
+  led[7] = clk_slower;
+end
 /*
   input logic [3:0] digit,
   input logic clock, rst_n,

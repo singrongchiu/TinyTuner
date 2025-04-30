@@ -37,14 +37,14 @@ module pdm_to_pcm(
       // $display("AM AT MAX INDEX!!!!!!!!!!!!!!!!!!");
     end
     else begin
+      if (pdm_buffer_index == 500) begin
+        clk_slower <= 0;
+      end
       mic_clk = 1;
       valid_out = 0;
       accumulator = accumulator + pdm_in;
       // $display("index2: %d", pdm_buffer_index);
       pdm_buffer_index = pdm_buffer_index + 1;
-      if (pdm_buffer_index == 500) begin
-        clk_slower <= 0;
-      end
     end
   end
   
