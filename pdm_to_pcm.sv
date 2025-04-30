@@ -8,12 +8,12 @@ module pdm_to_pcm(
   output logic clk_slower
 );
 
-  localparam int SAMPLING_RATE = 256;
-  localparam int NUM_BITS = 8; // max = 256
+  localparam int SAMPLING_RATE = 5000;
+//  localparam int NUM_BITS = 8; // max = 256
   
   // logic [SAMPLING_RATE-1:0] pdm_buffer;
-  logic [NUM_BITS-1:0] pdm_buffer_index;
-  logic [7:0] accumulator; 
+  logic [14:0] pdm_buffer_index;
+  logic [14:0] accumulator; 
   
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -22,8 +22,8 @@ module pdm_to_pcm(
       // $display("RESET!!!!!!!!!!!!!!!!");
       // $display("index1: %d", pdm_buffer_index);
     end
-    else if (pdm_buffer_index == 8'b11111111) begin
-      pcm_out = (accumulator + pdm_in);
+    else if (pdm_buffer_index == 5000) begin
+      pcm_out = (accumulator + pdm_in) >> 5;
       accumulator = 0;
       valid_out = 1;
       pdm_buffer_index = 0;
@@ -35,7 +35,7 @@ module pdm_to_pcm(
       valid_out = 0;
       // $display("index2: %d", pdm_buffer_index);
       pdm_buffer_index = pdm_buffer_index + 1;
-      if (pdm_buffer_index == 8'b01111111) begin
+      if (pdm_buffer_index == 2500) begin
         clk_slower <= 0;
       end
     end
