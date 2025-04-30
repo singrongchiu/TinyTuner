@@ -48,7 +48,7 @@ EHXPLLL #(
 endmodule : slowerclk
 
 module pdm_to_pcm#(
-  parameter DATA_WIDTH = 16,
+  parameter DATA_WIDTH = 6,
 )(
   input clk,          // System clock - we are getting 5 MHz - will need 2.5 MHz
   input pdm_in,       // PDM microphone output
@@ -73,8 +73,8 @@ module pdm_to_pcm#(
       // $display("RESET!!!!!!!!!!!!!!!!");
       // $display("index1: %d", pdm_buffer_index);
     end
-    else if (pdm_buffer_index == 1000) begin
-      pcm_out = (accumulator + pdm_in);
+    else if (pdm_buffer_index == 500) begin
+      pcm_out = (accumulator + pdm_in) >> 3;
       accumulator = 0;
       valid_out = 1;
       pdm_buffer_index = 0;
@@ -82,7 +82,7 @@ module pdm_to_pcm#(
       // $display("AM AT MAX INDEX!!!!!!!!!!!!!!!!!!");
     end
     else begin
-      if (pdm_buffer_index == 500) begin
+      if (pdm_buffer_index == 250) begin
         clk_slower_fft = 0;
         accumulator = accumulator + pdm_in;
         mic_clk = ~mic_clk;
@@ -101,9 +101,8 @@ module pdm_to_pcm#(
   
 endmodule : pdm_to_pcm
 
-
 module Radix2FFTPipeline8N #(
-    parameter DATA_WIDTH = 16,
+    parameter DATA_WIDTH = 6,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 8,
     localparam STAGES = $clog2(N)
@@ -116,7 +115,8 @@ module Radix2FFTPipeline8N #(
 //     output logic [N*DATA_WIDTH-1:0] out_real,
 //     output logic [N*DATA_WIDTH-1:0] out_imag,
     output logic out_valid,
-    output logic [STAGES-1:0] highest_bin
+    output logic [STAGES-1:0] highest_bin,
+    output logic [DATA_WIDTH<<1:0] out_max_magnitude
   /*
     output logic [DATA_WIDTH-1:0] out_real,
     output logic [DATA_WIDTH-1:0] out_imag,
@@ -173,10 +173,12 @@ module Radix2FFTPipeline8N #(
               stage_imag0[i] <= mic_input_imag0[i];
             end
           end
-//           $display("mic input 0");
-//           $display(mic_input_real[0]);
-//           $display("mic input 1");
-//           $display(mic_input_real[1]);
+          /*
+          $display("mic input 0");
+          $display(mic_input_real0);
+           $display("mic input 1");
+          $display(mic_input_real1);
+          */
           // $display(stage_real);
         end else if (in_valid) begin
           if (mic_inputting_array) begin
@@ -241,6 +243,20 @@ module Radix2FFTPipeline8N #(
 //     generate
 //       for (genvar s = 0; s < STAGES; s++) begin : fft_stage
        
+  function automatic signed [11:0] simple_mult;  // 6b * 6b = 12b
+    input signed [5:0] a;
+    input signed [5:0] b;
+    begin
+        simple_mult = 
+            (b[0] ? a       : 0) +
+            (b[1] ? a << 1  : 0) +
+            (b[2] ? a << 2  : 0) +
+            (b[3] ? a << 3  : 0) +
+            (b[4] ? a << 4  : 0) +
+            (b[5] ? a << 5  : 0);
+    end
+  endfunction
+
   ///// STAGE 1
         // note, had to watch out for bit reversal
         always_ff @(posedge clk or posedge reset) begin
@@ -253,9 +269,14 @@ module Radix2FFTPipeline8N #(
             for (int pair = 0; pair < 4; pair++) begin : fft_pair
 
                 // Calculate indices
-              idx_a0 = group << 3 + pair;
+              idx_a0 = (group << 3) + pair;
               idx_b0 = idx_a0 + (N >> (0+1));
               twiddle_index[0] = pair;
+              /*
+              $display("pair %d", pair);
+              $display("idx_a0 %d", idx_a0);
+              $display("idx_b0 %d", idx_b0);
+              */
 
                 // Read inputs
               a_real0 = stage_real0[idx_a0];
@@ -264,6 +285,16 @@ module Radix2FFTPipeline8N #(
               b_imag0 = stage_imag0[idx_b0];
               abdiff_real0 = stage_real0[idx_a0] - stage_real0[idx_b0];
               abdiff_imag0 = stage_imag0[idx_a0] - stage_imag0[idx_b0];
+              
+              /*
+              $display("a_real0 %d", a_real0);
+              $display("a_imag0 %d", a_imag0);
+              $display("b_real0 %d", b_real0);
+              $display("b_imag0 %d", b_imag0);
+              $display("abdiff_real0 %d", abdiff_real0);
+              $display("abdiff_imag0 %d", abdiff_imag0);
+              */
+
 
               prod_real[0] = (abdiff_real0 * twiddle_real[twiddle_index[0]] - abdiff_imag0 * twiddle_imag[twiddle_index[0]]) >>> (TWIDDLE_WIDTH - 2);
               prod_imag[0] = (abdiff_real0 * twiddle_imag[twiddle_index[0]] + abdiff_imag0 * twiddle_real[twiddle_index[0]]) >>> (TWIDDLE_WIDTH - 2);
@@ -282,6 +313,9 @@ module Radix2FFTPipeline8N #(
         end
 //       end
 //     endgenerate
+
+         logic signed [DATA_WIDTH-1:0] temp_real1;
+        logic signed [DATA_WIDTH-1:0] temp_real2;
   
   ////// STAGE 2
       always_ff @(posedge clk or posedge reset) begin
@@ -289,28 +323,36 @@ module Radix2FFTPipeline8N #(
             stage_valid2 <= 0;
           end
         else if (stage_valid1) begin
-            //             $display("stage %d fft layer", 2);
-//             $display(stage_real[s]);
-//             $display(stage_imag[s]);
           stage_valid2 <= 1;
-          for (int group = 0; group < (2**1); group++) begin : fft_group
-          for (int pair = 0; pair < N / (2**(1+1)); pair++) begin : fft_pair
+          for (int group = 0; group < 2; group++) begin : fft_group
+            for (int pair = 0; pair < 2; pair++) begin : fft_pair
 
                 // Calculate indices
-            idx_a1 = group << 2 + pair;
+              idx_a1 = (group << 2) + pair;
             idx_b1 = idx_a1 + (N >> (1+1));
-            twiddle_index[1] = pair * (2**1);
+            twiddle_index[1] = pair << 1;
 
                 // Read inputs
             a_real1 = stage_real1[idx_a1];
             a_imag1 = stage_imag1[idx_a1];
             b_real1 = stage_real1[idx_b1];
             b_imag1 = stage_imag1[idx_b1];
-            abdiff_real1 = stage_real1[idx_a1] - stage_real1[idx_b1];
-            abdiff_imag1 = stage_imag1[idx_a1] - stage_imag1[idx_b1];
+              abdiff_real1 = stage_real1[idx_a1] - stage_real1[idx_b1];
+              abdiff_imag1 = stage_imag1[idx_a1] - stage_imag1[idx_b1];
+              
+              
+              temp_real1 = simple_mult(abdiff_real1, twiddle_real[twiddle_index[1]]) - 
+                   simple_mult(abdiff_imag1, twiddle_imag[twiddle_index[1]]);
+        
+        temp_imag1 = simple_mult(abdiff_real1, twiddle_imag[twiddle_index[1]]) + 
+                   simple_mult(abdiff_imag1, twiddle_real[twiddle_index[1]]);
+        
+        // Apply scaling
+        prod_real[1] = temp_real1 >>> (TWIDDLE_WIDTH - 2);
+        prod_imag[1] = temp_imag1 >>> (TWIDDLE_WIDTH - 2);
 
-            prod_real[1] = (abdiff_real1 * twiddle_real[twiddle_index[1]] - abdiff_imag1 * twiddle_imag[twiddle_index[1]]) >>> (TWIDDLE_WIDTH - 2);
-            prod_imag[1] = (abdiff_real1 * twiddle_imag[twiddle_index[1]] + abdiff_imag1 * twiddle_real[twiddle_index[1]]) >>> (TWIDDLE_WIDTH - 2);
+        //    prod_real[1] = (abdiff_real1 * twiddle_real[twiddle_index[1]] - abdiff_imag1 * twiddle_imag[twiddle_index[1]]) >>> (TWIDDLE_WIDTH - 2);
+        //    prod_imag[1] = (abdiff_real1 * twiddle_imag[twiddle_index[1]] + abdiff_imag1 * twiddle_real[twiddle_index[1]]) >>> (TWIDDLE_WIDTH - 2);
 
                 // Butterfly
             stage_real2[idx_a1] <= (a_real1 + b_real1) >>> 1;
@@ -337,9 +379,9 @@ module Radix2FFTPipeline8N #(
       for (int pair = 0; pair < N / (8); pair++) begin : fft_pair
 
                 // Calculate indices
-        idx_a2 = group << 1 + pair;
+        idx_a2 = (group << 1) + pair;
         idx_b2 = idx_a2 + (N >> (3));
-        twiddle_index[2] = pair * (4);
+        twiddle_index[2] = pair << 2;
 
                 // Read inputs
         a_real2 = stage_real2[idx_a2];
@@ -366,9 +408,10 @@ module Radix2FFTPipeline8N #(
      end
 
   logic [STAGES-1:0] max_bin;
-  logic signed [DATA_WIDTH*2:0] max_magnitude;
-  logic signed [DATA_WIDTH*2:0] current_magnitude;
-    
+  logic signed [DATA_WIDTH<<1:0] max_magnitude;
+  logic signed [DATA_WIDTH<<1:0] current_magnitude;
+   assign out_max_magnitude = max_magnitude;
+   
     // Output
     always_ff @(posedge clk or posedge reset) begin
         if (reset) begin
@@ -384,10 +427,24 @@ module Radix2FFTPipeline8N #(
 //           $display("fft output (not bitreversed)");
 //           $display(stage_real[STAGES]);
 //           $display(stage_imag[STAGES]);
-          
-          // for (int i = 0; i < N; i++) begin
-          for (int i = N-1; i >= 0; i--) begin
-            current_magnitude = ((stage_real3[i])*(stage_real3[i])) + ((stage_imag3[i])*(stage_imag3[i]));
+           max_magnitude = 0;
+           for (int i = 0; i < N; i++) begin
+         // for (int i = N-1; i >= 0; i--) begin
+         // NOTE: Not enough space on FPGA for real magnitude, so just going to do pseudo magnitude
+         //   current_magnitude = ((stage_real3[i])*(stage_real3[i])) + ((stage_imag3[i])*(stage_imag3[i]));
+              if (stage_real3[i] < 0) begin
+                current_magnitude = (~stage_real3[i]) + 1;
+              end
+              else begin
+                current_magnitude = stage_real3[i];
+              end
+              
+              if (stage_imag3[i] < 0) begin
+                current_magnitude = current_magnitude + ((~stage_imag3[i]) + 1);
+              end
+              else begin
+                current_magnitude = current_magnitude + stage_imag3[i];
+              end
 //             $display("i: %d", i);
 //             $display(stage_real[STAGES][i]);
 //             $display(stage_real[STAGES][i] >>> (DATA_WIDTH/4));
@@ -406,7 +463,8 @@ module Radix2FFTPipeline8N #(
           end
           highest_bin = max_bin;
           out_valid = 1'b1;
-          max_magnitude = 0;
+          // max_magnitude = 0;
+          
           /*
           $display("highest_bin: %d", max_bin);
           $display("highest_magnitude: %d", max_magnitude);
@@ -414,6 +472,7 @@ module Radix2FFTPipeline8N #(
           $display(stage_real3);
           $display(stage_imag3);
           */
+          
         end else begin
 //           $display(stage_valid);
           out_valid = 1'b0;
@@ -500,7 +559,7 @@ module fft_top (
   output logic [7:0] led,
   output logic slowerclk
 );
-parameter DATA_WIDTH = 16;
+parameter DATA_WIDTH = 6;
 /*
   input clkin, // 25 MHz, 0 deg
   output clkout0, // 5 MHz, 0 deg
@@ -527,6 +586,7 @@ pdm_to_pcm my_pdm_to_cdm(.clk(pllclkout), .pdm_in(pdm_in), .reset(reset), .pcm_o
 
 logic out_valid;
 logic [2:0] highest_bin;
+logic [DATA_WIDTH<<1:0] max_magnitude;
 /*
   input  logic clk,
   input  logic reset,
@@ -536,7 +596,7 @@ logic [2:0] highest_bin;
   output logic out_valid,
   output logic [STAGES-1:0] highest_bin
 */
-Radix2FFTPipeline8N myRadix2FFTPipeline8N(.clk(clk_slower), .reset(reset), .in_real(pcm_out), .in_imag(0), .in_valid(valid_out), .out_valid(out_valid), .highest_bin(highest_bin));
+Radix2FFTPipeline8N myRadix2FFTPipeline8N(.clk(clk_slower), .reset(reset), .in_real(pcm_out), .in_imag(0), .in_valid(valid_out), .out_valid(out_valid), .highest_bin(highest_bin), .out_max_magnitude(max_magnitude));
 
 logic [2:0] bitreversed_bin;
 /*
@@ -545,17 +605,18 @@ logic [2:0] bitreversed_bin;
 */
 bit_reverse mybit_reverse(.data_in(highest_bin), .data_out(bitreversed_bin));
 
-
+/*
 always_ff @(posedge clk) begin
-  led[0] = pcm_out[0];
-  led[1] = pcm_out[1];
-  led[2] = pcm_out[2];
-  led[3] = pcm_out[3];
-  led[4] = pcm_out[4];
-  led[5] = pcm_out[5];
-  led[6] = pcm_out[6];
-  led[7] = pcm_out[7];
+  led[0] = max_magnitude[0];
+  led[1] = max_magnitude[1];
+  led[2] = max_magnitude[2];
+  led[3] = max_magnitude[3];
+  led[4] = max_magnitude[4];
+  led[5] = max_magnitude[5];
+  led[6] = max_magnitude[6];
+  led[7] = max_magnitude[7];
 end
+*/
 
 /*
   input logic [3:0] digit,
