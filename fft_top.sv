@@ -71,7 +71,7 @@ module pdm_to_pcm(
       // $display("RESET!!!!!!!!!!!!!!!!");
       // $display("index1: %d", pdm_buffer_index);
     end
-    else if (pdm_buffer_index === 1000) begin
+    else if (pdm_buffer_index == 1000) begin
       pcm_out = (accumulator + pdm_in) >> 4;
       accumulator = 0;
       valid_out = 1;
@@ -80,14 +80,20 @@ module pdm_to_pcm(
       // $display("AM AT MAX INDEX!!!!!!!!!!!!!!!!!!");
     end
     else begin
-      if (pdm_buffer_index === 500) begin
+      if (pdm_buffer_index == 500) begin
         clk_slower_fft = 0;
-      end
-      valid_out = 0;
-      accumulator = accumulator + pdm_in;
-      mic_clk = ~mic_clk;
+        accumulator = accumulator + pdm_in;
+        mic_clk = ~mic_clk;
       // $display("index2: %d", pdm_buffer_index);
-      pdm_buffer_index = pdm_buffer_index + 1;
+        pdm_buffer_index = pdm_buffer_index + 1;
+      end
+      else begin
+        // valid_out = 0;
+        accumulator = accumulator + pdm_in;
+        mic_clk = ~mic_clk;
+        // $display("index2: %d", pdm_buffer_index);
+        pdm_buffer_index = pdm_buffer_index + 1;
+      end
     end
   end
   
@@ -489,6 +495,7 @@ module fft_top (
   input reset,
   output logic mic_clk,
   output logic [6:0] sevseg,
+  output logic [7:0] led
 );
 /*
   input clkin, // 25 MHz, 0 deg
@@ -533,7 +540,7 @@ logic [2:0] bitreversed_bin;
 */
 bit_reverse mybit_reverse(.data_in(highest_bin), .data_out(bitreversed_bin));
 
-/*
+
 always_ff @(posedge clk) begin
   led[0] = pcm_out[0];
   led[1] = pcm_out[1];
@@ -544,7 +551,7 @@ always_ff @(posedge clk) begin
   led[6] = bitreversed_bin[2];
   led[7] = clk_slower;
 end
-*/
+
 /*
   input logic [3:0] digit,
   input logic clock, reset,

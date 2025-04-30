@@ -21,7 +21,7 @@
         }
       },
       "cells": {
-        "$specify$7973": {
+        "$specify$8185": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -513,7 +513,7 @@
         }
       },
       "cells": {
-        "$specify$1855": {
+        "$specify$1859": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -544,7 +544,7 @@
             "SRC": [ 2 ]
           }
         },
-        "$specify$1856": {
+        "$specify$1860": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -575,7 +575,7 @@
             "SRC": [ 3 ]
           }
         },
-        "$specify$1857": {
+        "$specify$1861": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -606,7 +606,7 @@
             "SRC": [ 4 ]
           }
         },
-        "$specify$1858": {
+        "$specify$1862": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -637,7 +637,7 @@
             "SRC": [ 5 ]
           }
         },
-        "$specify$1859": {
+        "$specify$1863": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -752,7 +752,7 @@
         }
       },
       "cells": {
-        "$specify$1860": {
+        "$specify$1864": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -783,7 +783,7 @@
             "SRC": [ 2 ]
           }
         },
-        "$specify$1861": {
+        "$specify$1865": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -814,7 +814,7 @@
             "SRC": [ 3 ]
           }
         },
-        "$specify$1862": {
+        "$specify$1866": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -845,7 +845,7 @@
             "SRC": [ 4 ]
           }
         },
-        "$specify$1863": {
+        "$specify$1867": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -876,7 +876,7 @@
             "SRC": [ 5 ]
           }
         },
-        "$specify$1864": {
+        "$specify$1868": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -907,7 +907,7 @@
             "SRC": [ 6 ]
           }
         },
-        "$specify$1865": {
+        "$specify$1869": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -1033,7 +1033,7 @@
         }
       },
       "cells": {
-        "$specify$1866": {
+        "$specify$1870": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -1064,7 +1064,7 @@
             "SRC": [ 2 ]
           }
         },
-        "$specify$1867": {
+        "$specify$1871": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -1095,7 +1095,7 @@
             "SRC": [ 3 ]
           }
         },
-        "$specify$1868": {
+        "$specify$1872": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -1126,7 +1126,7 @@
             "SRC": [ 4 ]
           }
         },
-        "$specify$1869": {
+        "$specify$1873": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -1157,7 +1157,7 @@
             "SRC": [ 5 ]
           }
         },
-        "$specify$1870": {
+        "$specify$1874": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -1188,7 +1188,7 @@
             "SRC": [ 6 ]
           }
         },
-        "$specify$1871": {
+        "$specify$1875": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -1219,7 +1219,7 @@
             "SRC": [ 7 ]
           }
         },
-        "$specify$1872": {
+        "$specify$1876": {
           "hide_name": 1,
           "type": "$specify2",
           "parameters": {
@@ -15232,7 +15232,6 @@
     "L6MUX21": {
       "attributes": {
         "blackbox": "00000000000000000000000000000001",
-        "cells_not_processed": "00000000000000000000000000000001",
         "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:65.1-72.10"
       },
       "ports": {
@@ -20620,7 +20619,6 @@
     "PFUMX": {
       "attributes": {
         "blackbox": "00000000000000000000000000000001",
-        "cells_not_processed": "00000000000000000000000000000001",
         "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:179.1-186.10"
       },
       "ports": {
@@ -21612,7 +21610,7 @@
     "fft_top": {
       "attributes": {
         "top": "00000000000000000000000000000001",
-        "src": "fft_top.sv:486.1-555.10"
+        "src": "fft_top.sv:492.1-562.10"
       },
       "ports": {
         "clk": {
@@ -21634,9 +21632,538 @@
         "sevseg": {
           "direction": "output",
           "bits": [ "1", "1", "0", "0", "1", "1", "0" ]
+        },
+        "led": {
+          "direction": "output",
+          "bits": [ 6, 7, 8, 9, "0", "0", "1", 10 ]
         }
       },
       "cells": {
+        "led_TRELLIS_FF_Q": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:544.1-553.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:16.100-16.154"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "DI": [ 11 ],
+            "LSR": [ "0" ],
+            "Q": [ 10 ]
+          }
+        },
+        "led_TRELLIS_FF_Q_1": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:544.1-553.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:16.100-16.154"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "DI": [ 12 ],
+            "LSR": [ "0" ],
+            "Q": [ 9 ]
+          }
+        },
+        "led_TRELLIS_FF_Q_2": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:544.1-553.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:16.100-16.154"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "DI": [ 13 ],
+            "LSR": [ "0" ],
+            "Q": [ 8 ]
+          }
+        },
+        "led_TRELLIS_FF_Q_3": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:544.1-553.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:16.100-16.154"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "DI": [ 14 ],
+            "LSR": [ "0" ],
+            "Q": [ 7 ]
+          }
+        },
+        "led_TRELLIS_FF_Q_4": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:544.1-553.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:16.100-16.154"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 2 ],
+            "DI": [ 15 ],
+            "LSR": [ "0" ],
+            "Q": [ 6 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "CE",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "SET",
+            "SRMODE": "LSR_OVER_CE"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:84.168-84.227"
+          },
+          "port_directions": {
+            "CE": "input",
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CE": [ 16 ],
+            "CLK": [ 17 ],
+            "DI": [ "0" ],
+            "LSR": [ 18 ],
+            "Q": [ 11 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z": {
+          "hide_name": 0,
+          "type": "L6MUX21",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:184.21-184.63"
+          },
+          "port_directions": {
+            "D0": "input",
+            "D1": "input",
+            "SD": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "D0": [ 19 ],
+            "D1": [ 20 ],
+            "SD": [ 21 ],
+            "Z": [ 16 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z": {
+          "hide_name": 0,
+          "type": "L6MUX21",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:182.21-182.64"
+          },
+          "port_directions": {
+            "D0": "input",
+            "D1": "input",
+            "SD": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "D0": [ 22 ],
+            "D1": [ 23 ],
+            "SD": [ 24 ],
+            "Z": [ 19 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D0_PFUMX_Z": {
+          "hide_name": 0,
+          "type": "PFUMX",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:178.19-178.65"
+          },
+          "port_directions": {
+            "ALUT": "input",
+            "BLUT": "input",
+            "C0": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "ALUT": [ 25 ],
+            "BLUT": [ 26 ],
+            "C0": [ 4 ],
+            "Z": [ 22 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D0_PFUMX_Z_ALUT_LUT4_Z": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:160.39-161.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ "0" ],
+            "C": [ "0" ],
+            "D": [ "0" ],
+            "Z": [ 25 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D0_PFUMX_Z_BLUT_LUT4_Z": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:158.39-159.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ "0" ],
+            "C": [ "0" ],
+            "D": [ "0" ],
+            "Z": [ 26 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D1_PFUMX_Z": {
+          "hide_name": 0,
+          "type": "PFUMX",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:179.19-179.65"
+          },
+          "port_directions": {
+            "ALUT": "input",
+            "BLUT": "input",
+            "C0": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "ALUT": [ 27 ],
+            "BLUT": [ 28 ],
+            "C0": [ 4 ],
+            "Z": [ 23 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:165.39-166.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ "0" ],
+            "C": [ "0" ],
+            "D": [ "0" ],
+            "Z": [ 27 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:163.39-164.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ "0" ],
+            "C": [ "0" ],
+            "D": [ "0" ],
+            "Z": [ 28 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z": {
+          "hide_name": 0,
+          "type": "L6MUX21",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:183.21-183.64"
+          },
+          "port_directions": {
+            "D0": "input",
+            "D1": "input",
+            "SD": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "D0": [ 29 ],
+            "D1": [ 30 ],
+            "SD": [ 24 ],
+            "Z": [ 20 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D0_PFUMX_Z": {
+          "hide_name": 0,
+          "type": "PFUMX",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:180.19-180.65"
+          },
+          "port_directions": {
+            "ALUT": "input",
+            "BLUT": "input",
+            "C0": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "ALUT": [ 31 ],
+            "BLUT": [ 32 ],
+            "C0": [ 4 ],
+            "Z": [ 29 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D0_PFUMX_Z_ALUT_LUT4_Z": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:170.39-171.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ "0" ],
+            "C": [ "0" ],
+            "D": [ "0" ],
+            "Z": [ 31 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D0_PFUMX_Z_BLUT_LUT4_Z": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:168.39-169.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ "0" ],
+            "C": [ "0" ],
+            "D": [ "0" ],
+            "Z": [ 32 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z": {
+          "hide_name": 0,
+          "type": "PFUMX",
+          "parameters": {
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:181.19-181.65"
+          },
+          "port_directions": {
+            "ALUT": "input",
+            "BLUT": "input",
+            "C0": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "ALUT": [ 33 ],
+            "BLUT": [ 34 ],
+            "C0": [ 4 ],
+            "Z": [ 30 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_ALUT_LUT4_Z": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0000000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:175.41-176.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ "0" ],
+            "B": [ "0" ],
+            "C": [ "0" ],
+            "D": [ "0" ],
+            "Z": [ 33 ]
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_BLUT_LUT4_Z": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0000010000100000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:173.41-174.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 35 ],
+            "B": [ 36 ],
+            "C": [ 37 ],
+            "D": [ 38 ],
+            "Z": [ 34 ]
+          }
+        },
         "my_pdm_to_cdm.mic_clk_LUT4_D": {
           "hide_name": 0,
           "type": "LUT4",
@@ -21659,7 +22186,7 @@
             "B": [ "0" ],
             "C": [ "0" ],
             "D": [ 5 ],
-            "Z": [ 6 ]
+            "Z": [ 39 ]
           }
         },
         "my_pdm_to_cdm.mic_clk_TRELLIS_FF_Q": {
@@ -21675,7 +22202,7 @@
           "attributes": {
             "always_ff": "00000000000000000000000000000001",
             "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:67.3-92.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:56.101-56.163"
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:56.101-56.163"
           },
           "port_directions": {
             "CE": "input",
@@ -21685,9 +22212,9 @@
             "Q": "output"
           },
           "connections": {
-            "CE": [ 7 ],
-            "CLK": [ 8 ],
-            "DI": [ 6 ],
+            "CE": [ 40 ],
+            "CLK": [ 17 ],
+            "DI": [ 39 ],
             "LSR": [ "0" ],
             "Q": [ 5 ]
           }
@@ -21711,10 +22238,155 @@
           },
           "connections": {
             "A": [ 4 ],
-            "B": [ 9 ],
-            "C": [ 10 ],
-            "D": [ 11 ],
-            "Z": [ 7 ]
+            "B": [ 24 ],
+            "C": [ 41 ],
+            "D": [ 21 ],
+            "Z": [ 40 ]
+          }
+        },
+        "my_pdm_to_cdm.pcm_out_TRELLIS_FF_Q": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "CE",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:56.101-56.163"
+          },
+          "port_directions": {
+            "CE": "input",
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CE": [ 18 ],
+            "CLK": [ 17 ],
+            "DI": [ 42 ],
+            "LSR": [ "0" ],
+            "Q": [ 12 ]
+          }
+        },
+        "my_pdm_to_cdm.pcm_out_TRELLIS_FF_Q_1": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "CE",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:56.101-56.163"
+          },
+          "port_directions": {
+            "CE": "input",
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CE": [ 18 ],
+            "CLK": [ 17 ],
+            "DI": [ 43 ],
+            "LSR": [ "0" ],
+            "Q": [ 13 ]
+          }
+        },
+        "my_pdm_to_cdm.pcm_out_TRELLIS_FF_Q_2": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "CE",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:56.101-56.163"
+          },
+          "port_directions": {
+            "CE": "input",
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CE": [ 18 ],
+            "CLK": [ 17 ],
+            "DI": [ 44 ],
+            "LSR": [ "0" ],
+            "Q": [ 14 ]
+          }
+        },
+        "my_pdm_to_cdm.pcm_out_TRELLIS_FF_Q_3": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "CE",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:56.101-56.163"
+          },
+          "port_directions": {
+            "CE": "input",
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CE": [ 18 ],
+            "CLK": [ 17 ],
+            "DI": [ 45 ],
+            "LSR": [ "0" ],
+            "Q": [ 15 ]
+          }
+        },
+        "my_pdm_to_cdm.pcm_out_TRELLIS_FF_Q_CE_LUT4_Z": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0100000000000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 4 ],
+            "B": [ 24 ],
+            "C": [ 41 ],
+            "D": [ 21 ],
+            "Z": [ 18 ]
           }
         },
         "myslowerclk.pll_i": {
@@ -21746,7 +22418,7 @@
             "MFG_GMCREF_SEL": "2",
             "hdlname": "myslowerclk pll_i",
             "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:499.11-499.67|fft_top.sv:32.7-47.3"
+            "src": "fft_top.sv:506.11-506.67|fft_top.sv:32.7-47.3"
           },
           "port_directions": {
             "CLKFB": "input",
@@ -21765,12 +22437,12 @@
             "STDBY": "input"
           },
           "connections": {
-            "CLKFB": [ 8 ],
+            "CLKFB": [ 17 ],
             "CLKI": [ 2 ],
             "CLKINTFB": [ ],
-            "CLKOP": [ 8 ],
+            "CLKOP": [ 17 ],
             "ENCLKOP": [ "0" ],
-            "LOCK": [ 12 ],
+            "LOCK": [ 46 ],
             "PHASEDIR": [ "1" ],
             "PHASELOADREG": [ "1" ],
             "PHASESEL0": [ "0" ],
@@ -21781,239 +22453,7 @@
             "STDBY": [ "0" ]
           }
         },
-        "reset_TRELLIS_FF_LSR": {
-          "hide_name": 0,
-          "type": "TRELLIS_FF",
-          "parameters": {
-            "CEMUX": "1 ",
-            "CLKMUX": "CLK",
-            "GSR": "DISABLED",
-            "LSRMUX": "LSR",
-            "REGSET": "RESET",
-            "SRMODE": "ASYNC"
-          },
-          "attributes": {
-            "always_ff": "00000000000000000000000000000001",
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:67.3-92.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
-          },
-          "port_directions": {
-            "CLK": "input",
-            "DI": "input",
-            "LSR": "input",
-            "Q": "output"
-          },
-          "connections": {
-            "CLK": [ 8 ],
-            "DI": [ 13 ],
-            "LSR": [ 4 ],
-            "Q": [ 14 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_1": {
-          "hide_name": 0,
-          "type": "TRELLIS_FF",
-          "parameters": {
-            "CEMUX": "1 ",
-            "CLKMUX": "CLK",
-            "GSR": "DISABLED",
-            "LSRMUX": "LSR",
-            "REGSET": "RESET",
-            "SRMODE": "ASYNC"
-          },
-          "attributes": {
-            "always_ff": "00000000000000000000000000000001",
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:67.3-92.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
-          },
-          "port_directions": {
-            "CLK": "input",
-            "DI": "input",
-            "LSR": "input",
-            "Q": "output"
-          },
-          "connections": {
-            "CLK": [ 8 ],
-            "DI": [ 15 ],
-            "LSR": [ 4 ],
-            "Q": [ 16 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_2": {
-          "hide_name": 0,
-          "type": "TRELLIS_FF",
-          "parameters": {
-            "CEMUX": "1 ",
-            "CLKMUX": "CLK",
-            "GSR": "DISABLED",
-            "LSRMUX": "LSR",
-            "REGSET": "RESET",
-            "SRMODE": "ASYNC"
-          },
-          "attributes": {
-            "always_ff": "00000000000000000000000000000001",
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:67.3-92.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
-          },
-          "port_directions": {
-            "CLK": "input",
-            "DI": "input",
-            "LSR": "input",
-            "Q": "output"
-          },
-          "connections": {
-            "CLK": [ 8 ],
-            "DI": [ 17 ],
-            "LSR": [ 4 ],
-            "Q": [ 18 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_3": {
-          "hide_name": 0,
-          "type": "TRELLIS_FF",
-          "parameters": {
-            "CEMUX": "1 ",
-            "CLKMUX": "CLK",
-            "GSR": "DISABLED",
-            "LSRMUX": "LSR",
-            "REGSET": "RESET",
-            "SRMODE": "ASYNC"
-          },
-          "attributes": {
-            "always_ff": "00000000000000000000000000000001",
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:67.3-92.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
-          },
-          "port_directions": {
-            "CLK": "input",
-            "DI": "input",
-            "LSR": "input",
-            "Q": "output"
-          },
-          "connections": {
-            "CLK": [ 8 ],
-            "DI": [ 19 ],
-            "LSR": [ 4 ],
-            "Q": [ 20 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_4": {
-          "hide_name": 0,
-          "type": "TRELLIS_FF",
-          "parameters": {
-            "CEMUX": "1 ",
-            "CLKMUX": "CLK",
-            "GSR": "DISABLED",
-            "LSRMUX": "LSR",
-            "REGSET": "RESET",
-            "SRMODE": "ASYNC"
-          },
-          "attributes": {
-            "always_ff": "00000000000000000000000000000001",
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:67.3-92.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
-          },
-          "port_directions": {
-            "CLK": "input",
-            "DI": "input",
-            "LSR": "input",
-            "Q": "output"
-          },
-          "connections": {
-            "CLK": [ 8 ],
-            "DI": [ 21 ],
-            "LSR": [ 4 ],
-            "Q": [ 22 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_5": {
-          "hide_name": 0,
-          "type": "TRELLIS_FF",
-          "parameters": {
-            "CEMUX": "1 ",
-            "CLKMUX": "CLK",
-            "GSR": "DISABLED",
-            "LSRMUX": "LSR",
-            "REGSET": "RESET",
-            "SRMODE": "ASYNC"
-          },
-          "attributes": {
-            "always_ff": "00000000000000000000000000000001",
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:67.3-92.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
-          },
-          "port_directions": {
-            "CLK": "input",
-            "DI": "input",
-            "LSR": "input",
-            "Q": "output"
-          },
-          "connections": {
-            "CLK": [ 8 ],
-            "DI": [ 23 ],
-            "LSR": [ 4 ],
-            "Q": [ 24 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_6": {
-          "hide_name": 0,
-          "type": "TRELLIS_FF",
-          "parameters": {
-            "CEMUX": "1 ",
-            "CLKMUX": "CLK",
-            "GSR": "DISABLED",
-            "LSRMUX": "LSR",
-            "REGSET": "RESET",
-            "SRMODE": "ASYNC"
-          },
-          "attributes": {
-            "always_ff": "00000000000000000000000000000001",
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:67.3-92.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
-          },
-          "port_directions": {
-            "CLK": "input",
-            "DI": "input",
-            "LSR": "input",
-            "Q": "output"
-          },
-          "connections": {
-            "CLK": [ 8 ],
-            "DI": [ 25 ],
-            "LSR": [ 4 ],
-            "Q": [ 26 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_7": {
-          "hide_name": 0,
-          "type": "TRELLIS_FF",
-          "parameters": {
-            "CEMUX": "1 ",
-            "CLKMUX": "CLK",
-            "GSR": "DISABLED",
-            "LSRMUX": "LSR",
-            "REGSET": "RESET",
-            "SRMODE": "ASYNC"
-          },
-          "attributes": {
-            "always_ff": "00000000000000000000000000000001",
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:67.3-92.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
-          },
-          "port_directions": {
-            "CLK": "input",
-            "DI": "input",
-            "LSR": "input",
-            "Q": "output"
-          },
-          "connections": {
-            "CLK": [ 8 ],
-            "DI": [ 27 ],
-            "LSR": [ 4 ],
-            "Q": [ 28 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_7_Q_CCU2C_B0": {
+        "pdm_in_CCU2C_A0": {
           "hide_name": 0,
           "type": "CCU2C",
           "parameters": {
@@ -22024,7 +22464,107 @@
           },
           "attributes": {
             "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:90.26-90.46|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:75.18-75.38|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
+          },
+          "port_directions": {
+            "A0": "input",
+            "A1": "input",
+            "B0": "input",
+            "B1": "input",
+            "C0": "input",
+            "C1": "input",
+            "CIN": "input",
+            "COUT": "output",
+            "D0": "input",
+            "D1": "input",
+            "S0": "output",
+            "S1": "output"
+          },
+          "connections": {
+            "A0": [ 3 ],
+            "A1": [ "0" ],
+            "B0": [ 47 ],
+            "B1": [ 48 ],
+            "C0": [ "0" ],
+            "C1": [ "0" ],
+            "CIN": [ "0" ],
+            "COUT": [ 49 ],
+            "D0": [ "1" ],
+            "D1": [ "1" ],
+            "S0": [ 50 ],
+            "S1": [ 51 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_B0_TRELLIS_FF_Q": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 52 ],
+            "LSR": [ 4 ],
+            "Q": [ 47 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_B1_TRELLIS_FF_Q": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 53 ],
+            "LSR": [ 4 ],
+            "Q": [ 48 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN": {
+          "hide_name": 0,
+          "type": "CCU2C",
+          "parameters": {
+            "INIT0": "1001011010101010",
+            "INIT1": "1001011010101010",
+            "INJECT1_0": "NO",
+            "INJECT1_1": "NO"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:75.18-75.38|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
           },
           "port_directions": {
             "A0": "input",
@@ -22043,19 +22583,77 @@
           "connections": {
             "A0": [ "0" ],
             "A1": [ "0" ],
-            "B0": [ 24 ],
-            "B1": [ 22 ],
+            "B0": [ 54 ],
+            "B1": [ 55 ],
             "C0": [ "0" ],
             "C1": [ "0" ],
-            "CIN": [ 29 ],
-            "COUT": [ 30 ],
+            "CIN": [ 49 ],
+            "COUT": [ 56 ],
             "D0": [ "1" ],
             "D1": [ "1" ],
-            "S0": [ 23 ],
-            "S1": [ 31 ]
+            "S0": [ 57 ],
+            "S1": [ 58 ]
           }
         },
-        "reset_TRELLIS_FF_LSR_7_Q_CCU2C_B0_1": {
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_B0_TRELLIS_FF_Q": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 59 ],
+            "LSR": [ 4 ],
+            "Q": [ 54 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_B1_TRELLIS_FF_Q": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 60 ],
+            "LSR": [ 4 ],
+            "Q": [ 55 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN": {
           "hide_name": 0,
           "type": "CCU2C",
           "parameters": {
@@ -22066,7 +22664,7 @@
           },
           "attributes": {
             "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:90.26-90.46|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:75.18-75.38|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
           },
           "port_directions": {
             "A0": "input",
@@ -22085,23 +22683,206 @@
           "connections": {
             "A0": [ "0" ],
             "A1": [ "0" ],
-            "B0": [ 28 ],
-            "B1": [ 26 ],
+            "B0": [ 61 ],
+            "B1": [ 62 ],
             "C0": [ "0" ],
             "C1": [ "0" ],
-            "CIN": [ 32 ],
-            "COUT": [ 29 ],
+            "CIN": [ 56 ],
+            "COUT": [ 63 ],
             "D0": [ "1" ],
             "D1": [ "1" ],
-            "S0": [ 27 ],
-            "S1": [ 33 ]
+            "S0": [ 45 ],
+            "S1": [ 44 ]
           }
         },
-        "reset_TRELLIS_FF_LSR_7_Q_LUT4_A": {
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_B0_TRELLIS_FF_Q": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 64 ],
+            "LSR": [ 4 ],
+            "Q": [ 61 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_B1_TRELLIS_FF_Q": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 65 ],
+            "LSR": [ 4 ],
+            "Q": [ 62 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_S0_CCU2C_S0": {
+          "hide_name": 0,
+          "type": "CCU2C",
+          "parameters": {
+            "INIT0": "1001011010101010",
+            "INIT1": "1001011010101010",
+            "INJECT1_0": "NO",
+            "INJECT1_1": "NO"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:75.18-75.38|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
+          },
+          "port_directions": {
+            "A0": "input",
+            "A1": "input",
+            "B0": "input",
+            "B1": "input",
+            "C0": "input",
+            "C1": "input",
+            "CIN": "input",
+            "COUT": "output",
+            "D0": "input",
+            "D1": "input",
+            "S0": "output",
+            "S1": "output"
+          },
+          "connections": {
+            "A0": [ "0" ],
+            "A1": [ "0" ],
+            "B0": [ 66 ],
+            "B1": [ 67 ],
+            "C0": [ "0" ],
+            "C1": [ "0" ],
+            "CIN": [ 63 ],
+            "COUT": [ 68 ],
+            "D0": [ "1" ],
+            "D1": [ "1" ],
+            "S0": [ 43 ],
+            "S1": [ 42 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_S0_CCU2C_S0_B0_TRELLIS_FF_Q": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 69 ],
+            "LSR": [ 4 ],
+            "Q": [ 66 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_S0_CCU2C_S0_B1_TRELLIS_FF_Q": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 70 ],
+            "LSR": [ 4 ],
+            "Q": [ 67 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S0_LUT4_A": {
           "hide_name": 0,
           "type": "LUT4",
           "parameters": {
-            "INIT": "0000010000000000"
+            "INIT": "0010101010101010"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 50 ],
+            "B": [ 24 ],
+            "C": [ 41 ],
+            "D": [ 21 ],
+            "Z": [ 52 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S0_LUT4_A_Z_LUT4_Z": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0111111100000000"
           },
           "attributes": {
             "module_not_derived": "00000000000000000000000000000001",
@@ -22116,71 +22897,163 @@
           },
           "connections": {
             "A": [ 24 ],
-            "B": [ 22 ],
-            "C": [ 28 ],
-            "D": [ 26 ],
-            "Z": [ 10 ]
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 42 ],
+            "Z": [ 70 ]
           }
         },
-        "reset_TRELLIS_FF_LSR_8": {
+        "pdm_in_CCU2C_A0_S0_LUT4_A_Z_LUT4_Z_1": {
           "hide_name": 0,
-          "type": "TRELLIS_FF",
+          "type": "LUT4",
           "parameters": {
-            "CEMUX": "1 ",
-            "CLKMUX": "CLK",
-            "GSR": "DISABLED",
-            "LSRMUX": "LSR",
-            "REGSET": "RESET",
-            "SRMODE": "ASYNC"
+            "INIT": "0111111100000000"
           },
           "attributes": {
-            "always_ff": "00000000000000000000000000000001",
             "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:67.3-92.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
           },
           "port_directions": {
-            "CLK": "input",
-            "DI": "input",
-            "LSR": "input",
-            "Q": "output"
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
           },
           "connections": {
-            "CLK": [ 8 ],
-            "DI": [ 34 ],
-            "LSR": [ 4 ],
-            "Q": [ 35 ]
+            "A": [ 24 ],
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 43 ],
+            "Z": [ 69 ]
           }
         },
-        "reset_TRELLIS_FF_LSR_9": {
+        "pdm_in_CCU2C_A0_S0_LUT4_A_Z_LUT4_Z_2": {
           "hide_name": 0,
-          "type": "TRELLIS_FF",
+          "type": "LUT4",
           "parameters": {
-            "CEMUX": "1 ",
-            "CLKMUX": "CLK",
-            "GSR": "DISABLED",
-            "LSRMUX": "LSR",
-            "REGSET": "RESET",
-            "SRMODE": "ASYNC"
+            "INIT": "0111111100000000"
           },
           "attributes": {
-            "always_ff": "00000000000000000000000000000001",
             "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:67.3-92.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
           },
           "port_directions": {
-            "CLK": "input",
-            "DI": "input",
-            "LSR": "input",
-            "Q": "output"
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
           },
           "connections": {
-            "CLK": [ 8 ],
-            "DI": [ 36 ],
-            "LSR": [ 4 ],
-            "Q": [ 37 ]
+            "A": [ 24 ],
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 44 ],
+            "Z": [ 65 ]
           }
         },
-        "reset_TRELLIS_FF_LSR_9_Q_CCU2C_B0": {
+        "pdm_in_CCU2C_A0_S0_LUT4_A_Z_LUT4_Z_3": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0111111100000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 45 ],
+            "Z": [ 64 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S0_LUT4_A_Z_LUT4_Z_4": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0111111100000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 58 ],
+            "Z": [ 60 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S0_LUT4_A_Z_LUT4_Z_5": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0111111100000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 57 ],
+            "Z": [ 59 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0100110011001100"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 51 ],
+            "C": [ 41 ],
+            "D": [ 21 ],
+            "Z": [ 53 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1": {
           "hide_name": 0,
           "type": "CCU2C",
           "parameters": {
@@ -22191,7 +23064,200 @@
           },
           "attributes": {
             "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:90.26-90.46|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:88.28-88.48|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
+          },
+          "port_directions": {
+            "A0": "input",
+            "A1": "input",
+            "B0": "input",
+            "B1": "input",
+            "C0": "input",
+            "C1": "input",
+            "CIN": "input",
+            "COUT": "output",
+            "D0": "input",
+            "D1": "input",
+            "S0": "output",
+            "S1": "output"
+          },
+          "connections": {
+            "A0": [ "0" ],
+            "A1": [ "0" ],
+            "B0": [ 71 ],
+            "B1": [ 35 ],
+            "C0": [ "0" ],
+            "C1": [ "0" ],
+            "CIN": [ 72 ],
+            "COUT": [ 73 ],
+            "D0": [ "1" ],
+            "D1": [ "1" ],
+            "S0": [ 74 ],
+            "S1": [ 75 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_CIN_CCU2C_COUT": {
+          "hide_name": 0,
+          "type": "CCU2C",
+          "parameters": {
+            "INIT0": "1001011010101010",
+            "INIT1": "1001011010101010",
+            "INJECT1_0": "NO",
+            "INJECT1_1": "NO"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:88.28-88.48|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
+          },
+          "port_directions": {
+            "A0": "input",
+            "A1": "input",
+            "B0": "input",
+            "B1": "input",
+            "C0": "input",
+            "C1": "input",
+            "CIN": "input",
+            "COUT": "output",
+            "D0": "input",
+            "D1": "input",
+            "S0": "output",
+            "S1": "output"
+          },
+          "connections": {
+            "A0": [ "0" ],
+            "A1": [ "0" ],
+            "B0": [ 76 ],
+            "B1": [ 77 ],
+            "C0": [ "0" ],
+            "C1": [ "0" ],
+            "CIN": [ 78 ],
+            "COUT": [ 72 ],
+            "D0": [ "1" ],
+            "D1": [ "1" ],
+            "S0": [ 79 ],
+            "S1": [ 80 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0111111100000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 74 ],
+            "Z": [ 81 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_CCU2C_S0": {
+          "hide_name": 0,
+          "type": "CCU2C",
+          "parameters": {
+            "INIT0": "1001011010101010",
+            "INIT1": "1001011010101010",
+            "INJECT1_0": "NO",
+            "INJECT1_1": "NO"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:88.28-88.48|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
+          },
+          "port_directions": {
+            "A0": "input",
+            "A1": "input",
+            "B0": "input",
+            "B1": "input",
+            "C0": "input",
+            "C1": "input",
+            "CIN": "input",
+            "COUT": "output",
+            "D0": "input",
+            "D1": "input",
+            "S0": "output",
+            "S1": "output"
+          },
+          "connections": {
+            "A0": [ "0" ],
+            "A1": [ "0" ],
+            "B0": [ 36 ],
+            "B1": [ 82 ],
+            "C0": [ "0" ],
+            "C1": [ "0" ],
+            "CIN": [ 83 ],
+            "COUT": [ 78 ],
+            "D0": [ "1" ],
+            "D1": [ "1" ],
+            "S0": [ 84 ],
+            "S1": [ 85 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_CCU2C_S0_1": {
+          "hide_name": 0,
+          "type": "CCU2C",
+          "parameters": {
+            "INIT0": "1001011010101010",
+            "INIT1": "1001011010101010",
+            "INJECT1_0": "NO",
+            "INJECT1_1": "NO"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:88.28-88.48|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
+          },
+          "port_directions": {
+            "A0": "input",
+            "A1": "input",
+            "B0": "input",
+            "B1": "input",
+            "C0": "input",
+            "C1": "input",
+            "CIN": "input",
+            "COUT": "output",
+            "D0": "input",
+            "D1": "input",
+            "S0": "output",
+            "S1": "output"
+          },
+          "connections": {
+            "A0": [ "0" ],
+            "A1": [ "0" ],
+            "B0": [ 38 ],
+            "B1": [ 37 ],
+            "C0": [ "0" ],
+            "C1": [ "0" ],
+            "CIN": [ 86 ],
+            "COUT": [ 83 ],
+            "D0": [ "1" ],
+            "D1": [ "1" ],
+            "S0": [ 87 ],
+            "S1": [ 88 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_CCU2C_S1": {
+          "hide_name": 0,
+          "type": "CCU2C",
+          "parameters": {
+            "INIT0": "1001011010101010",
+            "INIT1": "1001011010101010",
+            "INJECT1_0": "NO",
+            "INJECT1_1": "NO"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:88.28-88.48|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
           },
           "port_directions": {
             "A0": "input",
@@ -22210,23 +23276,173 @@
           "connections": {
             "A0": [ "1" ],
             "A1": [ "0" ],
-            "B0": [ 37 ],
-            "B1": [ 35 ],
+            "B0": [ 89 ],
+            "B1": [ 90 ],
             "C0": [ "0" ],
             "C1": [ "0" ],
             "CIN": [ "0" ],
-            "COUT": [ 32 ],
+            "COUT": [ 86 ],
             "D0": [ "1" ],
             "D1": [ "1" ],
-            "S0": [ 38 ],
-            "S1": [ 34 ]
+            "S0": [ 91 ],
+            "S1": [ 92 ]
           }
         },
-        "reset_TRELLIS_FF_LSR_9_Q_LUT4_A": {
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_LUT4_Z": {
           "hide_name": 0,
           "type": "LUT4",
           "parameters": {
-            "INIT": "0010001100110011"
+            "INIT": "0111111100000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 75 ],
+            "Z": [ 93 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_LUT4_Z_1": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0111111100000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 80 ],
+            "Z": [ 94 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_LUT4_Z_2": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0111111100000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 79 ],
+            "Z": [ 95 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_LUT4_Z_3": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0111111100000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 85 ],
+            "Z": [ 96 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_LUT4_Z_4": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0111111100000000"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 41 ],
+            "C": [ 21 ],
+            "D": [ 88 ],
+            "Z": [ 97 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_LUT4_Z_5": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0001010101010101"
+          },
+          "attributes": {
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "C": "input",
+            "D": "input",
+            "Z": "output"
+          },
+          "connections": {
+            "A": [ 89 ],
+            "B": [ 24 ],
+            "C": [ 41 ],
+            "D": [ 21 ],
+            "Z": [ 98 ]
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_LUT4_Z": {
+          "hide_name": 0,
+          "type": "LUT4",
+          "parameters": {
+            "INIT": "0000000000100000"
           },
           "attributes": {
             "module_not_derived": "00000000000000000000000000000001",
@@ -22241,17 +23457,307 @@
           },
           "connections": {
             "A": [ 35 ],
-            "B": [ 37 ],
-            "C": [ 10 ],
-            "D": [ 11 ],
-            "Z": [ 36 ]
+            "B": [ 36 ],
+            "C": [ 37 ],
+            "D": [ 38 ],
+            "Z": [ 41 ]
           }
         },
-        "reset_TRELLIS_FF_LSR_9_Q_LUT4_A_Z_LUT4_Z": {
+        "reset_TRELLIS_FF_LSR": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 93 ],
+            "LSR": [ 4 ],
+            "Q": [ 35 ]
+          }
+        },
+        "reset_TRELLIS_FF_LSR_1": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 81 ],
+            "LSR": [ 4 ],
+            "Q": [ 71 ]
+          }
+        },
+        "reset_TRELLIS_FF_LSR_2": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 94 ],
+            "LSR": [ 4 ],
+            "Q": [ 77 ]
+          }
+        },
+        "reset_TRELLIS_FF_LSR_3": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 95 ],
+            "LSR": [ 4 ],
+            "Q": [ 76 ]
+          }
+        },
+        "reset_TRELLIS_FF_LSR_4": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 96 ],
+            "LSR": [ 4 ],
+            "Q": [ 82 ]
+          }
+        },
+        "reset_TRELLIS_FF_LSR_5": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 84 ],
+            "LSR": [ 4 ],
+            "Q": [ 36 ]
+          }
+        },
+        "reset_TRELLIS_FF_LSR_6": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 97 ],
+            "LSR": [ 4 ],
+            "Q": [ 37 ]
+          }
+        },
+        "reset_TRELLIS_FF_LSR_7": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 87 ],
+            "LSR": [ 4 ],
+            "Q": [ 38 ]
+          }
+        },
+        "reset_TRELLIS_FF_LSR_8": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 92 ],
+            "LSR": [ 4 ],
+            "Q": [ 90 ]
+          }
+        },
+        "reset_TRELLIS_FF_LSR_9": {
+          "hide_name": 0,
+          "type": "TRELLIS_FF",
+          "parameters": {
+            "CEMUX": "1 ",
+            "CLKMUX": "CLK",
+            "GSR": "DISABLED",
+            "LSRMUX": "LSR",
+            "REGSET": "RESET",
+            "SRMODE": "ASYNC"
+          },
+          "attributes": {
+            "always_ff": "00000000000000000000000000000001",
+            "module_not_derived": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:67.3-98.6|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:63.157-63.208"
+          },
+          "port_directions": {
+            "CLK": "input",
+            "DI": "input",
+            "LSR": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "CLK": [ 17 ],
+            "DI": [ 98 ],
+            "LSR": [ 4 ],
+            "Q": [ 89 ]
+          }
+        },
+        "reset_TRELLIS_FF_LSR_Q_LUT4_Z": {
           "hide_name": 0,
           "type": "LUT4",
           "parameters": {
-            "INIT": "0111111100000000"
+            "INIT": "0000000000001000"
           },
           "attributes": {
             "module_not_derived": "00000000000000000000000000000001",
@@ -22265,143 +23771,18 @@
             "Z": "output"
           },
           "connections": {
-            "A": [ 9 ],
-            "B": [ 10 ],
-            "C": [ 11 ],
-            "D": [ 39 ],
-            "Z": [ 13 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_9_Q_LUT4_A_Z_LUT4_Z_1": {
-          "hide_name": 0,
-          "type": "LUT4",
-          "parameters": {
-            "INIT": "0111111100000000"
-          },
-          "attributes": {
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
-          },
-          "port_directions": {
-            "A": "input",
-            "B": "input",
-            "C": "input",
-            "D": "input",
-            "Z": "output"
-          },
-          "connections": {
-            "A": [ 9 ],
-            "B": [ 10 ],
-            "C": [ 11 ],
-            "D": [ 40 ],
-            "Z": [ 15 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_9_Q_LUT4_A_Z_LUT4_Z_2": {
-          "hide_name": 0,
-          "type": "LUT4",
-          "parameters": {
-            "INIT": "0111111100000000"
-          },
-          "attributes": {
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
-          },
-          "port_directions": {
-            "A": "input",
-            "B": "input",
-            "C": "input",
-            "D": "input",
-            "Z": "output"
-          },
-          "connections": {
-            "A": [ 9 ],
-            "B": [ 10 ],
-            "C": [ 11 ],
-            "D": [ 41 ],
-            "Z": [ 17 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_9_Q_LUT4_A_Z_LUT4_Z_3": {
-          "hide_name": 0,
-          "type": "LUT4",
-          "parameters": {
-            "INIT": "0111111100000000"
-          },
-          "attributes": {
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
-          },
-          "port_directions": {
-            "A": "input",
-            "B": "input",
-            "C": "input",
-            "D": "input",
-            "Z": "output"
-          },
-          "connections": {
-            "A": [ 9 ],
-            "B": [ 10 ],
-            "C": [ 11 ],
-            "D": [ 42 ],
-            "Z": [ 19 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_9_Q_LUT4_A_Z_LUT4_Z_4": {
-          "hide_name": 0,
-          "type": "LUT4",
-          "parameters": {
-            "INIT": "0111111100000000"
-          },
-          "attributes": {
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
-          },
-          "port_directions": {
-            "A": "input",
-            "B": "input",
-            "C": "input",
-            "D": "input",
-            "Z": "output"
-          },
-          "connections": {
-            "A": [ 9 ],
-            "B": [ 10 ],
-            "C": [ 11 ],
-            "D": [ 31 ],
+            "A": [ 77 ],
+            "B": [ 76 ],
+            "C": [ 90 ],
+            "D": [ 89 ],
             "Z": [ 21 ]
           }
         },
-        "reset_TRELLIS_FF_LSR_9_Q_LUT4_A_Z_LUT4_Z_5": {
+        "reset_TRELLIS_FF_LSR_Q_LUT4_Z_1": {
           "hide_name": 0,
           "type": "LUT4",
           "parameters": {
-            "INIT": "0111111100000000"
-          },
-          "attributes": {
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
-          },
-          "port_directions": {
-            "A": "input",
-            "B": "input",
-            "C": "input",
-            "D": "input",
-            "Z": "output"
-          },
-          "connections": {
-            "A": [ 9 ],
-            "B": [ 10 ],
-            "C": [ 11 ],
-            "D": [ 33 ],
-            "Z": [ 25 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_9_Q_LUT4_C": {
-          "hide_name": 0,
-          "type": "LUT4",
-          "parameters": {
-            "INIT": "0000000000001111"
+            "INIT": "1111000000000000"
           },
           "attributes": {
             "module_not_derived": "00000000000000000000000000000001",
@@ -22417,118 +23798,9 @@
           "connections": {
             "A": [ "0" ],
             "B": [ "0" ],
-            "C": [ 35 ],
-            "D": [ 37 ],
-            "Z": [ 9 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_Q_CCU2C_B0": {
-          "hide_name": 0,
-          "type": "CCU2C",
-          "parameters": {
-            "INIT0": "1001011010101010",
-            "INIT1": "1001011010101010",
-            "INJECT1_0": "NO",
-            "INJECT1_1": "NO"
-          },
-          "attributes": {
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:90.26-90.46|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
-          },
-          "port_directions": {
-            "A0": "input",
-            "A1": "input",
-            "B0": "input",
-            "B1": "input",
-            "C0": "input",
-            "C1": "input",
-            "CIN": "input",
-            "COUT": "output",
-            "D0": "input",
-            "D1": "input",
-            "S0": "output",
-            "S1": "output"
-          },
-          "connections": {
-            "A0": [ "0" ],
-            "A1": [ "0" ],
-            "B0": [ 16 ],
-            "B1": [ 14 ],
-            "C0": [ "0" ],
-            "C1": [ "0" ],
-            "CIN": [ 43 ],
-            "COUT": [ 44 ],
-            "D0": [ "1" ],
-            "D1": [ "1" ],
-            "S0": [ 40 ],
-            "S1": [ 39 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_Q_CCU2C_B0_1": {
-          "hide_name": 0,
-          "type": "CCU2C",
-          "parameters": {
-            "INIT0": "1001011010101010",
-            "INIT1": "1001011010101010",
-            "INJECT1_0": "NO",
-            "INJECT1_1": "NO"
-          },
-          "attributes": {
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:90.26-90.46|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4"
-          },
-          "port_directions": {
-            "A0": "input",
-            "A1": "input",
-            "B0": "input",
-            "B1": "input",
-            "C0": "input",
-            "C1": "input",
-            "CIN": "input",
-            "COUT": "output",
-            "D0": "input",
-            "D1": "input",
-            "S0": "output",
-            "S1": "output"
-          },
-          "connections": {
-            "A0": [ "0" ],
-            "A1": [ "0" ],
-            "B0": [ 20 ],
-            "B1": [ 18 ],
-            "C0": [ "0" ],
-            "C1": [ "0" ],
-            "CIN": [ 30 ],
-            "COUT": [ 43 ],
-            "D0": [ "1" ],
-            "D1": [ "1" ],
-            "S0": [ 42 ],
-            "S1": [ 41 ]
-          }
-        },
-        "reset_TRELLIS_FF_LSR_Q_LUT4_A": {
-          "hide_name": 0,
-          "type": "LUT4",
-          "parameters": {
-            "INIT": "1000000000000000"
-          },
-          "attributes": {
-            "module_not_derived": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:128.32-129.56"
-          },
-          "port_directions": {
-            "A": "input",
-            "B": "input",
-            "C": "input",
-            "D": "input",
-            "Z": "output"
-          },
-          "connections": {
-            "A": [ 14 ],
-            "B": [ 16 ],
-            "C": [ 20 ],
-            "D": [ 18 ],
-            "Z": [ 11 ]
+            "C": [ 71 ],
+            "D": [ 82 ],
+            "Z": [ 24 ]
           }
         }
       },
@@ -22537,43 +23809,50 @@
           "hide_name": 0,
           "bits": [ "0", "0", "1" ],
           "attributes": {
-            "src": "fft_top.sv:529.13-529.28"
+            "src": "fft_top.sv:536.13-536.28"
           }
         },
         "clk": {
           "hide_name": 0,
           "bits": [ 2 ],
           "attributes": {
-            "src": "fft_top.sv:487.9-487.12"
+            "src": "fft_top.sv:493.9-493.12"
           }
         },
         "clk_slower": {
           "hide_name": 0,
-          "bits": [ "x" ],
+          "bits": [ 11 ],
           "attributes": {
-            "src": "fft_top.sv:504.7-504.17"
+            "src": "fft_top.sv:511.7-511.17"
           }
         },
         "highest_bin": {
           "hide_name": 0,
           "bits": [ "1", "0", "0" ],
           "attributes": {
-            "src": "fft_top.sv:517.13-517.24"
+            "src": "fft_top.sv:524.13-524.24"
+          }
+        },
+        "led": {
+          "hide_name": 0,
+          "bits": [ 6, 7, 8, 9, "0", "0", "1", 10 ],
+          "attributes": {
+            "src": "fft_top.sv:498.22-498.25"
           }
         },
         "mic_clk": {
           "hide_name": 0,
           "bits": [ 5 ],
           "attributes": {
-            "src": "fft_top.sv:490.16-490.23"
+            "src": "fft_top.sv:496.16-496.23"
           }
         },
         "myRadix2FFTPipeline8N.clk": {
           "hide_name": 0,
-          "bits": [ "x" ],
+          "bits": [ 11 ],
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N clk",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:103.18-103.21"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:109.18-109.21"
           }
         },
         "myRadix2FFTPipeline8N.highest_bin": {
@@ -22581,7 +23860,7 @@
           "bits": [ "1", "0", "0" ],
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N highest_bin",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:111.31-111.42"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:117.31-117.42"
           }
         },
         "myRadix2FFTPipeline8N.in_imag": {
@@ -22589,7 +23868,23 @@
           "bits": [ "0", "0", "0", "0", "0", "0", "0", "0" ],
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N in_imag",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:106.35-106.42"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:112.35-112.42"
+          }
+        },
+        "myRadix2FFTPipeline8N.in_real": {
+          "hide_name": 0,
+          "bits": [ 15, 14, 13, 12, "x", "x", "0", "0" ],
+          "attributes": {
+            "hdlname": "myRadix2FFTPipeline8N in_real",
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:111.35-111.42"
+          }
+        },
+        "myRadix2FFTPipeline8N.in_valid": {
+          "hide_name": 0,
+          "bits": [ "1" ],
+          "attributes": {
+            "hdlname": "myRadix2FFTPipeline8N in_valid",
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:113.18-113.26"
           }
         },
         "myRadix2FFTPipeline8N.max_magnitude": {
@@ -22598,7 +23893,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N max_magnitude",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:361.33-361.46"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:367.33-367.46"
           }
         },
         "myRadix2FFTPipeline8N.reset": {
@@ -22606,7 +23901,7 @@
           "bits": [ 4 ],
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N reset",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:104.18-104.23"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:110.18-110.23"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag1[1]": {
@@ -22615,7 +23910,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag1[1]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:126.33-126.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:132.33-132.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag1[2]": {
@@ -22624,7 +23919,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag1[2]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:126.33-126.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:132.33-132.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag1[3]": {
@@ -22633,7 +23928,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag1[3]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:126.33-126.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:132.33-132.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag1[5]": {
@@ -22642,7 +23937,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag1[5]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:126.33-126.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:132.33-132.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag1[6]": {
@@ -22651,7 +23946,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag1[6]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:126.33-126.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:132.33-132.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag1[7]": {
@@ -22660,7 +23955,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag1[7]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:126.33-126.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:132.33-132.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag2[1]": {
@@ -22669,7 +23964,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag2[1]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:127.33-127.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:133.33-133.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag2[3]": {
@@ -22678,7 +23973,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag2[3]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:127.33-127.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:133.33-133.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag2[5]": {
@@ -22687,7 +23982,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag2[5]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:127.33-127.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:133.33-133.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag2[7]": {
@@ -22696,7 +23991,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag2[7]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:127.33-127.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:133.33-133.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag3[1]": {
@@ -22705,7 +24000,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag3[1]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:128.33-128.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:134.33-134.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag3[2]": {
@@ -22714,7 +24009,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag3[2]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:128.33-128.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:134.33-134.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag3[3]": {
@@ -22723,7 +24018,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag3[3]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:128.33-128.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:134.33-134.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag3[4]": {
@@ -22732,7 +24027,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag3[4]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:128.33-128.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:134.33-134.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag3[5]": {
@@ -22741,7 +24036,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag3[5]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:128.33-128.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:134.33-134.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag3[6]": {
@@ -22750,7 +24045,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag3[6]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:128.33-128.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:134.33-134.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_imag3[7]": {
@@ -22759,7 +24054,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_imag3[7]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:128.33-128.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:134.33-134.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real1[1]": {
@@ -22768,7 +24063,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real1[1]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:121.33-121.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:127.33-127.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real1[2]": {
@@ -22777,7 +24072,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real1[2]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:121.33-121.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:127.33-127.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real1[3]": {
@@ -22786,7 +24081,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real1[3]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:121.33-121.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:127.33-127.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real1[5]": {
@@ -22795,7 +24090,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real1[5]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:121.33-121.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:127.33-127.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real1[6]": {
@@ -22804,7 +24099,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real1[6]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:121.33-121.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:127.33-127.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real1[7]": {
@@ -22813,7 +24108,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real1[7]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:121.33-121.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:127.33-127.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real2[1]": {
@@ -22822,7 +24117,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real2[1]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:122.33-122.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:128.33-128.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real2[3]": {
@@ -22831,7 +24126,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real2[3]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:122.33-122.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:128.33-128.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real2[5]": {
@@ -22840,7 +24135,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real2[5]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:122.33-122.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:128.33-128.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real2[7]": {
@@ -22849,7 +24144,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real2[7]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:122.33-122.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:128.33-128.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real3[1]": {
@@ -22858,7 +24153,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real3[1]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:123.33-123.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:129.33-129.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real3[2]": {
@@ -22867,7 +24162,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real3[2]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:123.33-123.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:129.33-129.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real3[3]": {
@@ -22876,7 +24171,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real3[3]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:123.33-123.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:129.33-129.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real3[4]": {
@@ -22885,7 +24180,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real3[4]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:123.33-123.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:129.33-129.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real3[5]": {
@@ -22894,7 +24189,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real3[5]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:123.33-123.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:129.33-129.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real3[6]": {
@@ -22903,7 +24198,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real3[6]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:123.33-123.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:129.33-129.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_real3[7]": {
@@ -22912,7 +24207,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_real3[7]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:123.33-123.44"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:129.33-129.44"
           }
         },
         "myRadix2FFTPipeline8N.stage_valid0": {
@@ -22920,7 +24215,7 @@
           "bits": [ "1" ],
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N stage_valid0",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:136.11-136.23"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:142.11-142.23"
           }
         },
         "myRadix2FFTPipeline8N.twiddle_imag[0]": {
@@ -22929,7 +24224,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N twiddle_imag[0]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:225.38-225.50"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:231.38-231.50"
           }
         },
         "myRadix2FFTPipeline8N.twiddle_imag[1]": {
@@ -22938,7 +24233,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N twiddle_imag[1]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:225.38-225.50"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:231.38-231.50"
           }
         },
         "myRadix2FFTPipeline8N.twiddle_imag[2]": {
@@ -22947,7 +24242,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N twiddle_imag[2]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:225.38-225.50"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:231.38-231.50"
           }
         },
         "myRadix2FFTPipeline8N.twiddle_imag[3]": {
@@ -22956,7 +24251,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N twiddle_imag[3]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:225.38-225.50"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:231.38-231.50"
           }
         },
         "myRadix2FFTPipeline8N.twiddle_real[0]": {
@@ -22965,7 +24260,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N twiddle_real[0]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:224.38-224.50"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:230.38-230.50"
           }
         },
         "myRadix2FFTPipeline8N.twiddle_real[1]": {
@@ -22974,7 +24269,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N twiddle_real[1]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:224.38-224.50"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:230.38-230.50"
           }
         },
         "myRadix2FFTPipeline8N.twiddle_real[2]": {
@@ -22983,7 +24278,7 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N twiddle_real[2]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:224.38-224.50"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:230.38-230.50"
           }
         },
         "myRadix2FFTPipeline8N.twiddle_real[3]": {
@@ -22992,23 +24287,136 @@
           "signed": 1,
           "attributes": {
             "hdlname": "myRadix2FFTPipeline8N twiddle_real[3]",
-            "src": "fft_top.sv:527.21-527.179|fft_top.sv:224.38-224.50"
+            "src": "fft_top.sv:534.21-534.179|fft_top.sv:230.38-230.50"
+          }
+        },
+        "my_pdm_to_cdm.accumulator": {
+          "hide_name": 0,
+          "bits": [ 99, 100, 101, 102, 103, 104, 105, 106, "x", "x" ],
+          "attributes": {
+            "hdlname": "my_pdm_to_cdm accumulator",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:65.15-65.26",
+            "unused_bits": "0 1 2 3 4 5 6 7"
           }
         },
         "my_pdm_to_cdm.clk": {
           "hide_name": 0,
-          "bits": [ 8 ],
+          "bits": [ 17 ],
           "attributes": {
             "hdlname": "my_pdm_to_cdm clk",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:51.9-51.12"
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:51.9-51.12"
           }
         },
         "my_pdm_to_cdm.clk_slower_fft": {
           "hide_name": 0,
-          "bits": [ "x" ],
+          "bits": [ 11 ],
           "attributes": {
             "hdlname": "my_pdm_to_cdm clk_slower_fft",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:57.16-57.30"
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:57.16-57.30"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE": {
+          "hide_name": 0,
+          "bits": [ 16 ],
+          "attributes": {
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0": {
+          "hide_name": 0,
+          "bits": [ 19 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.66-157.68"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D0": {
+          "hide_name": 0,
+          "bits": [ 22 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.50-157.52"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D0_PFUMX_Z_ALUT": {
+          "hide_name": 0,
+          "bits": [ 25 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.22-157.24"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D0_PFUMX_Z_BLUT": {
+          "hide_name": 0,
+          "bits": [ 26 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.18-157.20"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D1": {
+          "hide_name": 0,
+          "bits": [ 23 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.54-157.56"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D1_PFUMX_Z_ALUT": {
+          "hide_name": 0,
+          "bits": [ 27 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.30-157.32"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D0_L6MUX21_Z_D1_PFUMX_Z_BLUT": {
+          "hide_name": 0,
+          "bits": [ 28 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.26-157.28"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1": {
+          "hide_name": 0,
+          "bits": [ 20 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.70-157.72"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D0": {
+          "hide_name": 0,
+          "bits": [ 29 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.58-157.60"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D0_PFUMX_Z_ALUT": {
+          "hide_name": 0,
+          "bits": [ 31 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.38-157.40"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D0_PFUMX_Z_BLUT": {
+          "hide_name": 0,
+          "bits": [ 32 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.34-157.36"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D1": {
+          "hide_name": 0,
+          "bits": [ 30 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.62-157.64"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_ALUT": {
+          "hide_name": 0,
+          "bits": [ 33 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.46-157.48"
+          }
+        },
+        "my_pdm_to_cdm.clk_slower_fft_TRELLIS_FF_Q_CE_L6MUX21_Z_D1_L6MUX21_Z_D1_PFUMX_Z_BLUT": {
+          "hide_name": 0,
+          "bits": [ 34 ],
+          "attributes": {
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:157.42-157.44"
           }
         },
         "my_pdm_to_cdm.mic_clk": {
@@ -23016,18 +24424,32 @@
           "bits": [ 5 ],
           "attributes": {
             "hdlname": "my_pdm_to_cdm mic_clk",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:56.16-56.23"
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:56.16-56.23"
+          }
+        },
+        "my_pdm_to_cdm.mic_clk_LUT4_D_Z": {
+          "hide_name": 0,
+          "bits": [ 39 ],
+          "attributes": {
           }
         },
         "my_pdm_to_cdm.mic_clk_TRELLIS_FF_Q_CE": {
           "hide_name": 0,
-          "bits": [ 7 ],
+          "bits": [ 40 ],
           "attributes": {
           }
         },
-        "my_pdm_to_cdm.mic_clk_TRELLIS_FF_Q_DI": {
+        "my_pdm_to_cdm.pcm_out": {
           "hide_name": 0,
-          "bits": [ 6 ],
+          "bits": [ 15, 14, 13, 12, "x", "x", "0", "0" ],
+          "attributes": {
+            "hdlname": "my_pdm_to_cdm pcm_out",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:54.22-54.29"
+          }
+        },
+        "my_pdm_to_cdm.pcm_out_TRELLIS_FF_Q_CE": {
+          "hide_name": 0,
+          "bits": [ 18 ],
           "attributes": {
           }
         },
@@ -23036,8 +24458,7 @@
           "bits": [ 3 ],
           "attributes": {
             "hdlname": "my_pdm_to_cdm pdm_in",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:52.9-52.15",
-            "unused_bits": "0 "
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:52.9-52.15"
           }
         },
         "my_pdm_to_cdm.reset": {
@@ -23045,7 +24466,15 @@
           "bits": [ 4 ],
           "attributes": {
             "hdlname": "my_pdm_to_cdm reset",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:53.9-53.14"
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:53.9-53.14"
+          }
+        },
+        "my_pdm_to_cdm.valid_out": {
+          "hide_name": 0,
+          "bits": [ "1" ],
+          "attributes": {
+            "hdlname": "my_pdm_to_cdm valid_out",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:55.16-55.25"
           }
         },
         "mybit_reverse.data_in": {
@@ -23053,7 +24482,7 @@
           "bits": [ "1", "0", "0" ],
           "attributes": {
             "hdlname": "mybit_reverse data_in",
-            "src": "fft_top.sv:534.13-534.77|fft_top.sv:419.35-419.42"
+            "src": "fft_top.sv:541.13-541.77|fft_top.sv:425.35-425.42"
           }
         },
         "mybit_reverse.data_out": {
@@ -23061,15 +24490,15 @@
           "bits": [ "0", "0", "1" ],
           "attributes": {
             "hdlname": "mybit_reverse data_out",
-            "src": "fft_top.sv:534.13-534.77|fft_top.sv:420.35-420.43"
+            "src": "fft_top.sv:541.13-541.77|fft_top.sv:426.35-426.43"
           }
         },
         "mysevenseg.clock": {
           "hide_name": 0,
-          "bits": [ "x" ],
+          "bits": [ 11 ],
           "attributes": {
             "hdlname": "mysevenseg clock",
-            "src": "fft_top.sv:553.10-553.97|fft_top.sv:436.17-436.22"
+            "src": "fft_top.sv:560.10-560.97|fft_top.sv:442.17-442.22"
           }
         },
         "mysevenseg.digit": {
@@ -23077,7 +24506,7 @@
           "bits": [ "0", "0", "1", "0" ],
           "attributes": {
             "hdlname": "mysevenseg digit",
-            "src": "fft_top.sv:553.10-553.97|fft_top.sv:435.24-435.29"
+            "src": "fft_top.sv:560.10-560.97|fft_top.sv:441.24-441.29"
           }
         },
         "mysevenseg.reset": {
@@ -23085,7 +24514,7 @@
           "bits": [ 4 ],
           "attributes": {
             "hdlname": "mysevenseg reset",
-            "src": "fft_top.sv:553.10-553.97|fft_top.sv:436.24-436.29"
+            "src": "fft_top.sv:560.10-560.97|fft_top.sv:442.24-442.29"
           }
         },
         "mysevenseg.sevseg": {
@@ -23093,7 +24522,7 @@
           "bits": [ "1", "1", "0", "0", "1", "1", "0" ],
           "attributes": {
             "hdlname": "mysevenseg sevseg",
-            "src": "fft_top.sv:553.10-553.97|fft_top.sv:437.24-437.30"
+            "src": "fft_top.sv:560.10-560.97|fft_top.sv:443.24-443.30"
           }
         },
         "myslowerclk.clkin": {
@@ -23101,82 +24530,286 @@
           "bits": [ 2 ],
           "attributes": {
             "hdlname": "myslowerclk clkin",
-            "src": "fft_top.sv:499.11-499.67|fft_top.sv:9.11-9.16"
+            "src": "fft_top.sv:506.11-506.67|fft_top.sv:9.11-9.16"
           }
         },
         "myslowerclk.clkout0": {
           "hide_name": 0,
-          "bits": [ 8 ],
+          "bits": [ 17 ],
           "attributes": {
             "hdlname": "myslowerclk clkout0",
-            "src": "fft_top.sv:499.11-499.67|fft_top.sv:10.12-10.19"
+            "src": "fft_top.sv:506.11-506.67|fft_top.sv:10.12-10.19"
           }
         },
         "myslowerclk.locked": {
           "hide_name": 0,
-          "bits": [ 12 ],
+          "bits": [ 46 ],
           "attributes": {
             "hdlname": "myslowerclk locked",
-            "src": "fft_top.sv:499.11-499.67|fft_top.sv:11.12-11.18",
+            "src": "fft_top.sv:506.11-506.67|fft_top.sv:11.12-11.18",
             "unused_bits": "0 "
+          }
+        },
+        "pcm_out": {
+          "hide_name": 0,
+          "bits": [ 15, 14, 13, 12 ],
+          "attributes": {
           }
         },
         "pdm_in": {
           "hide_name": 0,
           "bits": [ 3 ],
           "attributes": {
-            "src": "fft_top.sv:488.9-488.15"
+            "src": "fft_top.sv:494.9-494.15"
+          }
+        },
+        "pdm_in_CCU2C_A0_B0": {
+          "hide_name": 0,
+          "bits": [ 47 ],
+          "attributes": {
+          }
+        },
+        "pdm_in_CCU2C_A0_B1": {
+          "hide_name": 0,
+          "bits": [ 48 ],
+          "attributes": {
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT": {
+          "hide_name": 0,
+          "bits": [ 49 ],
+          "attributes": {
+            "abc9_carry": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:75.18-75.38|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13"
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_B0": {
+          "hide_name": 0,
+          "bits": [ 54 ],
+          "attributes": {
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_B1": {
+          "hide_name": 0,
+          "bits": [ 55 ],
+          "attributes": {
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT": {
+          "hide_name": 0,
+          "bits": [ 56 ],
+          "attributes": {
+            "abc9_carry": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:75.18-75.38|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13"
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_B0": {
+          "hide_name": 0,
+          "bits": [ 61 ],
+          "attributes": {
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_B1": {
+          "hide_name": 0,
+          "bits": [ 62 ],
+          "attributes": {
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_COUT": {
+          "hide_name": 0,
+          "bits": [ 63 ],
+          "attributes": {
+            "abc9_carry": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:75.18-75.38|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13"
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_S0": {
+          "hide_name": 0,
+          "bits": [ 107, 108, 109, 110, 45, 44, 43, 42, 111, 112 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:75.18-75.38|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:34.26-34.27",
+            "unused_bits": "0 1 2 3 8 9"
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_S0_CCU2C_S0_B0": {
+          "hide_name": 0,
+          "bits": [ 66 ],
+          "attributes": {
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_S0_CCU2C_S0_B1": {
+          "hide_name": 0,
+          "bits": [ 67 ],
+          "attributes": {
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_COUT_CCU2C_CIN_S0_CCU2C_S0_COUT": {
+          "hide_name": 0,
+          "bits": [ 68 ],
+          "attributes": {
+            "abc9_carry": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:75.18-75.38|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13",
+            "unused_bits": "0 "
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_S0": {
+          "hide_name": 0,
+          "bits": [ 24, 41, 21, 57 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
+          }
+        },
+        "pdm_in_CCU2C_A0_COUT_CCU2C_CIN_S1": {
+          "hide_name": 0,
+          "bits": [ 24, 41, 21, 58 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
+          }
+        },
+        "pdm_in_CCU2C_A0_S0": {
+          "hide_name": 0,
+          "bits": [ 50, 24, 41, 21 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
+          }
+        },
+        "pdm_in_CCU2C_A0_S0_LUT4_A_Z": {
+          "hide_name": 0,
+          "bits": [ 52, 53, 59, 60, 64, 65, 69, 70 ],
+          "attributes": {
+          }
+        },
+        "pdm_in_CCU2C_A0_S1": {
+          "hide_name": 0,
+          "bits": [ 24, 51, 41, 21 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C": {
+          "hide_name": 0,
+          "bits": [ 24, 41, 21, 75 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_CIN": {
+          "hide_name": 0,
+          "bits": [ 72 ],
+          "attributes": {
+            "abc9_carry": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:88.28-88.48|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13"
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_CIN_CCU2C_COUT_S0": {
+          "hide_name": 0,
+          "bits": [ 24, 41, 21, 79 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_CIN_CCU2C_COUT_S1": {
+          "hide_name": 0,
+          "bits": [ 24, 41, 21, 80 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_COUT": {
+          "hide_name": 0,
+          "bits": [ 73 ],
+          "attributes": {
+            "abc9_carry": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:88.28-88.48|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13",
+            "unused_bits": "0 "
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0": {
+          "hide_name": 0,
+          "bits": [ 24, 41, 21, 74 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z": {
+          "hide_name": 0,
+          "bits": [ 98, 92, 87, 97, 84, 96, 95, 94, 81, 93 ],
+          "attributes": {
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_CCU2C_S0_1_COUT": {
+          "hide_name": 0,
+          "bits": [ 83 ],
+          "attributes": {
+            "abc9_carry": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:88.28-88.48|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13"
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_CCU2C_S0_1_S1": {
+          "hide_name": 0,
+          "bits": [ 24, 41, 21, 88 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_CCU2C_S0_COUT": {
+          "hide_name": 0,
+          "bits": [ 78 ],
+          "attributes": {
+            "abc9_carry": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:88.28-88.48|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13"
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_CCU2C_S0_S1": {
+          "hide_name": 0,
+          "bits": [ 24, 41, 21, 85 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_CCU2C_S1_COUT": {
+          "hide_name": 0,
+          "bits": [ 86 ],
+          "attributes": {
+            "abc9_carry": "00000000000000000000000000000001",
+            "src": "fft_top.sv:521.12-521.164|fft_top.sv:88.28-88.48|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13"
+          }
+        },
+        "pdm_in_CCU2C_A0_S1_LUT4_B_C_CCU2C_S1_S0_LUT4_D_Z_CCU2C_S1_S0": {
+          "hide_name": 0,
+          "bits": [ 91 ],
+          "attributes": {
+            "unused_bits": "0 "
           }
         },
         "pllclkout": {
           "hide_name": 0,
-          "bits": [ 8 ],
+          "bits": [ 17 ],
           "attributes": {
-            "src": "fft_top.sv:498.7-498.16"
+            "src": "fft_top.sv:505.7-505.16"
           }
         },
         "reset": {
           "hide_name": 0,
           "bits": [ 4 ],
           "attributes": {
-            "src": "fft_top.sv:489.9-489.14"
+            "src": "fft_top.sv:495.9-495.14"
           }
         },
-        "reset_TRELLIS_FF_LSR_7_Q": {
+        "reset_TRELLIS_FF_LSR_4_Q": {
           "hide_name": 0,
-          "bits": [ 24, 22, 28, 26 ],
-          "attributes": {
-            "force_downto": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
-          }
-        },
-        "reset_TRELLIS_FF_LSR_7_Q_CCU2C_B0_1_COUT": {
-          "hide_name": 0,
-          "bits": [ 29 ],
-          "attributes": {
-            "abc9_carry": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:90.26-90.46|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13"
-          }
-        },
-        "reset_TRELLIS_FF_LSR_7_Q_CCU2C_B0_1_S1": {
-          "hide_name": 0,
-          "bits": [ 9, 10, 11, 33 ],
-          "attributes": {
-            "force_downto": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
-          }
-        },
-        "reset_TRELLIS_FF_LSR_7_Q_CCU2C_B0_COUT": {
-          "hide_name": 0,
-          "bits": [ 30 ],
-          "attributes": {
-            "abc9_carry": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:90.26-90.46|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13"
-          }
-        },
-        "reset_TRELLIS_FF_LSR_7_Q_CCU2C_B0_S1": {
-          "hide_name": 0,
-          "bits": [ 9, 10, 11, 31 ],
+          "bits": [ 71, 82 ],
           "attributes": {
             "force_downto": "00000000000000000000000000000001",
             "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
@@ -23184,85 +24817,15 @@
         },
         "reset_TRELLIS_FF_LSR_9_Q": {
           "hide_name": 0,
-          "bits": [ 35, 37 ],
+          "bits": [ 77, 76, 90, 89 ],
           "attributes": {
             "force_downto": "00000000000000000000000000000001",
             "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
-          }
-        },
-        "reset_TRELLIS_FF_LSR_9_Q_CCU2C_B0_COUT": {
-          "hide_name": 0,
-          "bits": [ 32 ],
-          "attributes": {
-            "abc9_carry": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:90.26-90.46|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13"
-          }
-        },
-        "reset_TRELLIS_FF_LSR_9_Q_CCU2C_B0_S0": {
-          "hide_name": 0,
-          "bits": [ 38 ],
-          "attributes": {
-            "unused_bits": "0 "
-          }
-        },
-        "reset_TRELLIS_FF_LSR_9_Q_LUT4_A_Z": {
-          "hide_name": 0,
-          "bits": [ 36, 34, 27, 25, 23, 21, 19, 17, 15, 13 ],
-          "attributes": {
           }
         },
         "reset_TRELLIS_FF_LSR_Q": {
           "hide_name": 0,
-          "bits": [ 14, 16, 20, 18 ],
-          "attributes": {
-            "force_downto": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
-          }
-        },
-        "reset_TRELLIS_FF_LSR_Q_CCU2C_B0_1_COUT": {
-          "hide_name": 0,
-          "bits": [ 43 ],
-          "attributes": {
-            "abc9_carry": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:90.26-90.46|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13"
-          }
-        },
-        "reset_TRELLIS_FF_LSR_Q_CCU2C_B0_1_S0": {
-          "hide_name": 0,
-          "bits": [ 9, 10, 11, 42 ],
-          "attributes": {
-            "force_downto": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
-          }
-        },
-        "reset_TRELLIS_FF_LSR_Q_CCU2C_B0_1_S1": {
-          "hide_name": 0,
-          "bits": [ 9, 10, 11, 41 ],
-          "attributes": {
-            "force_downto": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
-          }
-        },
-        "reset_TRELLIS_FF_LSR_Q_CCU2C_B0_COUT": {
-          "hide_name": 0,
-          "bits": [ 44 ],
-          "attributes": {
-            "abc9_carry": "00000000000000000000000000000001",
-            "src": "fft_top.sv:514.12-514.164|fft_top.sv:90.26-90.46|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/arith_map.v:74.7-80.4|/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_sim.v:82.9-82.13",
-            "unused_bits": "0 "
-          }
-        },
-        "reset_TRELLIS_FF_LSR_Q_CCU2C_B0_S0": {
-          "hide_name": 0,
-          "bits": [ 9, 10, 11, 40 ],
-          "attributes": {
-            "force_downto": "00000000000000000000000000000001",
-            "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
-          }
-        },
-        "reset_TRELLIS_FF_LSR_Q_LUT4_A_Z": {
-          "hide_name": 0,
-          "bits": [ 9, 10, 11, 39 ],
+          "bits": [ 35, 36, 37, 38, 4, 24, 21 ],
           "attributes": {
             "force_downto": "00000000000000000000000000000001",
             "src": "/home/user/oss-cad-suite/lib/../share/yosys/ecp5/cells_map.v:108.23-108.24"
@@ -23272,7 +24835,14 @@
           "hide_name": 0,
           "bits": [ "1", "1", "0", "0", "1", "1", "0" ],
           "attributes": {
-            "src": "fft_top.sv:491.22-491.28"
+            "src": "fft_top.sv:497.22-497.28"
+          }
+        },
+        "valid_out": {
+          "hide_name": 0,
+          "bits": [ "1" ],
+          "attributes": {
+            "src": "fft_top.sv:509.7-509.16"
           }
         }
       }
