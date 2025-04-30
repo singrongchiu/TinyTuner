@@ -50,7 +50,7 @@ endmodule : slowerclk
 module pdm_to_pcm(
   input clk,          // System clock - we are getting 5 MHz - will need 2.5 MHz
   input pdm_in,       // PDM microphone output
-  input rst_n,
+  input reset,
   output logic [7:0] pcm_out, // 8-bit PCM output
   output logic valid_out,
   output logic mic_clk,
@@ -64,8 +64,8 @@ module pdm_to_pcm(
   logic [10:0] pdm_buffer_index;
   logic [10:0] accumulator; 
   
-  always_ff @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
+  always_ff @(posedge clk or posedge reset) begin
+    if (reset) begin
       pdm_buffer_index = 0;
       accumulator = 0;
       // $display("RESET!!!!!!!!!!!!!!!!");
@@ -76,7 +76,7 @@ module pdm_to_pcm(
       pdm_buffer_index = pdm_buffer_index + 1;
       mic_clk = 0;
     end
-    else if (pdm_buffer_index == 1000) begin
+    else if (pdm_buffer_index === 1000) begin
       pcm_out = (accumulator + pdm_in) >> 4;
       accumulator = 0;
       valid_out = 1;
@@ -85,7 +85,7 @@ module pdm_to_pcm(
       // $display("AM AT MAX INDEX!!!!!!!!!!!!!!!!!!");
     end
     else begin
-      if (pdm_buffer_index == 500) begin
+      if (pdm_buffer_index === 500) begin
         clk_slower = 0;
       end
       mic_clk = 1;
@@ -106,7 +106,7 @@ module Radix2FFTPipeline8N #(
     localparam STAGES = $clog2(N)
 )(
     input  logic clk,
-    input  logic rst_n,
+    input  logic reset,
     input  logic [DATA_WIDTH-1:0] in_real,
     input  logic [DATA_WIDTH-1:0] in_imag,
     input  logic in_valid,
@@ -148,12 +148,12 @@ module Radix2FFTPipeline8N #(
     logic [STAGES:0] mic_input_index;
     logic mic_inputting_array;
   // Input stage
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
 //           stage_valid[0] <= 0;
           mic_input_index <= 0;
           mic_inputting_array <= 0;
-        end else if (mic_input_index == N) begin
+        end else if (mic_input_index === N) begin
           stage_valid0 <= 1;
 //           $display("LC: STAGE SHOULD BE VALID!");
           mic_input_index <= 0;
@@ -230,20 +230,18 @@ module Radix2FFTPipeline8N #(
     logic signed [TWIDDLE_WIDTH-1:0] twiddle_imag[N/2];
     logic [STAGES-1:0] twiddle_index[0:STAGES];
   
-//     always_ff @(negedge rst_n) begin
   assign twiddle_real[0] = 8'sd64; assign twiddle_imag[0] = 8'sd0;
   assign twiddle_real[1] = 8'sd45; assign twiddle_imag[1] = -8'sd45;
   assign twiddle_real[2] = 8'sd0; assign twiddle_imag[2] = -8'sd64;
   assign twiddle_real[3] = -8'sd45; assign twiddle_imag[3] = -8'sd45;
-//     end
   
 //     generate
 //       for (genvar s = 0; s < STAGES; s++) begin : fft_stage
        
   ///// STAGE 1
         // note, had to watch out for bit reversal
-        always_ff @(posedge clk or negedge rst_n) begin
-          if (!rst_n) begin
+        always_ff @(posedge clk or posedge reset) begin
+          if (reset) begin
             stage_valid1 <= 0;
           end
           else if (stage_valid0) begin
@@ -283,8 +281,8 @@ module Radix2FFTPipeline8N #(
 //     endgenerate
   
   ////// STAGE 2
-      always_ff @(posedge clk or negedge rst_n) begin
-          if (!rst_n) begin
+      always_ff @(posedge clk or posedge reset) begin
+          if (reset) begin
             stage_valid2 <= 0;
           end
         else if (stage_valid1) begin
@@ -326,8 +324,8 @@ module Radix2FFTPipeline8N #(
         end
   
   ////// STAGE 3
-  always_ff @(posedge clk or negedge rst_n) begin
-          if (!rst_n) begin
+  always_ff @(posedge clk or posedge reset) begin
+          if (reset) begin
             stage_valid3 <= 0;
           end
     else if (stage_valid2) begin
@@ -369,8 +367,8 @@ module Radix2FFTPipeline8N #(
   logic signed [DATA_WIDTH*2:0] current_magnitude;
     
     // Output
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
           out_valid = 1'b0;
 //           for (int i = 0; i < N; i++) begin
 //             out_real[i]  <= '0;
@@ -439,48 +437,50 @@ endmodule : bit_reverse
 
 module sevenseg
     (input logic [3:0] digit,
-    input logic clock, rst_n,
+    input logic clock, reset,
     output logic [6:0] sevseg);
 
 // ABCDEFG
 // 0123456
 
-always_ff @(posedge clock or negedge rst_n) begin
-  if (!rst_n) begin
+always_ff @(posedge clock) begin
+/*
+  if (reset) begin
   // output 0: ABCDEF
-    sevseg = 7'b1111110;
+    sevseg = 7'b1111111;
   end
-  else if (digit == 0) begin
+  */
+  if (digit === 0) begin
     // output 0: ABCDEF
-    sevseg = 7'b1111110;
+    sevseg = 7'b0000001;
   end
-  else if (digit == 1) begin
+  else if (digit === 1) begin
     // output 1: BC
     sevseg = 7'b0110000;
   end
-  else if (digit == 2) begin
+  else if (digit === 2) begin
     // output 2: ABGED
     sevseg = 7'b1101101;
   end
-  else if (digit == 3) begin
+  else if (digit === 3) begin
     // output 3: ABGCD
     sevseg = 7'b1111001;
   end
-  else if (digit == 4) begin
+  else if (digit === 4) begin
     // output 4: FGBC
     sevseg = 7'b0110011;
   end
-  else if (digit == 5) begin
+  else if (digit === 5) begin
     // output 4: ACDFG
     sevseg = 7'b1011011;
   end
-  else if (digit == 6) begin
+  else if (digit === 6) begin
     // output 4: ACDEFG
     sevseg = 7'b1011111;
   end
-  else if (digit == 7) begin
+  else if (digit === 7) begin
     // output 4: ABC
-    sevseg = 7'b111000;
+    sevseg = 7'b1110000;
   end
 end
 
@@ -489,7 +489,7 @@ endmodule : sevenseg
 module fft_top (
   input clk,          // System clock
   input pdm_in,       // PDM microphone output
-  input rst_n,
+  input reset,
   output logic mic_clk,
   output logic [6:0] sevseg,
   output logic [7:0] led
@@ -509,26 +509,26 @@ logic clk_slower;
 /*
   input clk,          // System clock - we are getting 5 MHz - will need 2.5 MHz
   input pdm_in,       // PDM microphone output
-  input rst_n,
+  input reset,
   output logic [7:0] pcm_out, // 8-bit PCM output
   output logic valid_out,
   output logic mic_clk,
   output logic clk_slower_fft
 */
-pdm_to_pcm my_pdm_to_cdm(.clk(pllclkout), .pdm_in(pdm_in), .rst_n(rst_n), .pcm_out(pcm_out), .valid_out(valid_out), .mic_clk(mic_clk), .clk_slower_fft(clk_slower));
+pdm_to_pcm my_pdm_to_cdm(.clk(pllclkout), .pdm_in(pdm_in), .reset(reset), .pcm_out(pcm_out), .valid_out(valid_out), .mic_clk(mic_clk), .clk_slower_fft(clk_slower));
 
 logic out_valid;
 logic [2:0] highest_bin;
 /*
   input  logic clk,
-  input  logic rst_n,
+  input  logic reset,
   input  logic [DATA_WIDTH-1:0] in_real,
   input  logic [DATA_WIDTH-1:0] in_imag,
   input  logic in_valid,
   output logic out_valid,
   output logic [STAGES-1:0] highest_bin
 */
-Radix2FFTPipeline8N myRadix2FFTPipeline8N(.clk(clk_slower), .rst_n(rst_n), .in_real(pcm_out), .in_imag(0), .in_valid(valid_out), .out_valid(out_valid), .highest_bin(highest_bin));
+Radix2FFTPipeline8N myRadix2FFTPipeline8N(.clk(clk_slower), .reset(reset), .in_real(pcm_out), .in_imag(0), .in_valid(valid_out), .out_valid(out_valid), .highest_bin(highest_bin));
 
 logic [2:0] bitreversed_bin;
 /*
@@ -542,16 +542,16 @@ always_ff @(posedge clk) begin
   led[1] = pcm_out[1];
   led[2] = pcm_out[2];
   led[3] = pcm_out[3];
-  led[4] = pcm_out[4];
-  led[5] = pcm_out[5];
-  led[6] = pcm_out[6];
+  led[4] = highest_bin[0];
+  led[5] = highest_bin[1];
+  led[6] = highest_bin[2];
   led[7] = clk_slower;
 end
 /*
   input logic [3:0] digit,
-  input logic clock, rst_n,
+  input logic clock, reset,
   output logic [6:0] sevseg
 */
-sevenseg mysevenseg(.digit(bitreversed_bin), .clock(clk_slower), .rst_n(rst_n), .sevseg(sevseg)); 
+sevenseg mysevenseg(.digit(bitreversed_bin), .clock(clk_slower), .reset(reset), .sevseg(sevseg)); 
 
 endmodule
