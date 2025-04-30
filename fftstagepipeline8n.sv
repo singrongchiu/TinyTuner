@@ -1,4 +1,4 @@
-module Radix2FFTPipeline8N #(
+module Radix2FFTPipeline #(
     parameter DATA_WIDTH = 8,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 8,
@@ -49,7 +49,7 @@ module Radix2FFTPipeline8N #(
   // Input stage
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-          stage_valid0 <= 0;
+//           stage_valid[0] <= 0;
           mic_input_index <= 0;
           mic_inputting_array <= 0;
         end else if (mic_input_index == N) begin
@@ -147,11 +147,7 @@ module Radix2FFTPipeline8N #(
           end
           else if (stage_valid0) begin
             stage_valid1 <= 1;
-          end
-          else begin
-            stage_valid1 <= 0;
-          end
-          for (int group = 0; group < (2**0); group++) begin : fft_group
+            for (int group = 0; group < (2**0); group++) begin : fft_group
             for (int pair = 0; pair < N / (2**(0+1)); pair++) begin : fft_pair
 
                 // Calculate indices
@@ -177,6 +173,10 @@ module Radix2FFTPipeline8N #(
               stage_imag1[idx_b0] <= (prod_imag[0]) >>> 1;
             end
           end
+          end
+          else begin
+            stage_valid1 <= 0;
+          end
         end
 //       end
 //     endgenerate
@@ -191,11 +191,7 @@ module Radix2FFTPipeline8N #(
 //             $display(stage_real[s]);
 //             $display(stage_imag[s]);
           stage_valid2 <= 1;
-          end
-          else begin
-            stage_valid2 <= 0;
-          end
-        for (int group = 0; group < (2**1); group++) begin : fft_group
+          for (int group = 0; group < (2**1); group++) begin : fft_group
           for (int pair = 0; pair < N / (2**(1+1)); pair++) begin : fft_pair
 
                 // Calculate indices
@@ -221,6 +217,11 @@ module Radix2FFTPipeline8N #(
             stage_imag2[idx_b1] <= (prod_imag[1]) >>> 1;
             end
           end
+          end
+          else begin
+            stage_valid2 <= 0;
+          end
+       
         end
   
   ////// STAGE 3
@@ -228,13 +229,9 @@ module Radix2FFTPipeline8N #(
           if (!rst_n) begin
             stage_valid3 <= 0;
           end
-          else if (stage_valid2) begin
-            stage_valid3 <= 1;
-          end
-          else begin
-            stage_valid3 <= 0;
-          end
-    for (int group = 0; group < (2**2); group++) begin : fft_group
+    else if (stage_valid2) begin
+      stage_valid3 <= 1;
+      for (int group = 0; group < (2**2); group++) begin : fft_group
       for (int pair = 0; pair < N / (2**(2+1)); pair++) begin : fft_pair
 
                 // Calculate indices
@@ -259,6 +256,10 @@ module Radix2FFTPipeline8N #(
         stage_real3[idx_b2] <= (prod_real[2]) >>> 1;
         stage_imag3[idx_b2] <= (prod_imag[2]) >>> 1;
             end
+          end
+          end
+          else begin
+            stage_valid3 <= 0;
           end
      end
 
@@ -302,11 +303,11 @@ module Radix2FFTPipeline8N #(
           end
           highest_bin <= max_bin;
           out_valid <= 1'b1;
-//           $display("highest_bin: %d", max_bin);
-//           $display("highest_magnitude: %d", max_magnitude);
-//           $display("stage 3! fft layer");
-//           $display(stage_real3);
-//           $display(stage_imag3);
+          $display("highest_bin: %d", max_bin);
+          $display("highest_magnitude: %d", max_magnitude);
+          $display("stage 3! fft layer");
+          $display(stage_real3);
+          $display(stage_imag3);
         end else begin
 //           $display(stage_valid);
           out_valid <= 1'b0;
