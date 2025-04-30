@@ -2,9 +2,10 @@
 module pdm_to_pcm(
   input clk,          // System clock
   input pdm_in,       // PDM microphone output
-  input reset,
+  input rst_n,
   output logic [7:0] pcm_out, // 8-bit PCM output
-  output logic valid_out
+  output logic valid_out,
+  output logic clk_slower
 );
 
   localparam int SAMPLING_RATE = 256;
@@ -14,8 +15,8 @@ module pdm_to_pcm(
   logic [NUM_BITS-1:0] pdm_buffer_index;
   logic [7:0] accumulator; 
   
-  always_ff @(posedge clk) begin
-    if (reset) begin
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
       pdm_buffer_index = 0;
       accumulator = 0;
       // $display("RESET!!!!!!!!!!!!!!!!");
@@ -26,6 +27,7 @@ module pdm_to_pcm(
       accumulator = 0;
       valid_out = 1;
       pdm_buffer_index = 0;
+      clk_slower <= 1;
       // $display("AM AT MAX INDEX!!!!!!!!!!!!!!!!!!");
     end
     else begin
@@ -33,6 +35,9 @@ module pdm_to_pcm(
       valid_out = 0;
       // $display("index2: %d", pdm_buffer_index);
       pdm_buffer_index = pdm_buffer_index + 1;
+      if (pdm_buffer_index == 8'b01111111) begin
+        clk_slower <= 0;
+      end
     end
   end
   
