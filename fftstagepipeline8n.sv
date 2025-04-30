@@ -1,4 +1,4 @@
-module Radix2FFTPipelineN8 #(
+module Radix2FFTPipeline #(
     parameter DATA_WIDTH = 8,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 8,
@@ -98,30 +98,38 @@ module Radix2FFTPipelineN8 #(
   
     generate
       for (genvar s = 0; s < STAGES; s++) begin : fft_stage
-        always_ff @(posedge clk or negedge rst_n) begin
-          if (!rst_n) begin
-            stage_valid[s+1] <= 0;
-          end else if (stage_valid[s]) begin
-//             $display("stage 0 fft layer");
-//             $display(stage_real[0]);
-//             $display("stage 1 fft layer");
-//             $display(stage_real[1]);
-            stage_valid[s+1] <= 1;
-//             $display("stage valid for %d", s);
-//             $display(stage_real[0]);
-//             $display("^ Stage Real!");
-          end else begin
-//             $display("stage NOT valid for %d", s);
-            stage_valid[s+1] <= 0;
-          end
-        end
+//         always_ff @(posedge clk or negedge rst_n) begin
+//           if (!rst_n) begin
+//             stage_valid[s+1] <= 0;
+//           end else if (stage_valid[s]) begin
+// //             $display("stage 0 fft layer");
+// //             $display(stage_real[0]);
+// //             $display("stage 1 fft layer");
+// //             $display(stage_real[1]);
+//             stage_valid[s+1] <= 1;
+// //             $display("stage valid for %d", s);
+// //             $display(stage_real[0]);
+// //             $display("^ Stage Real!");
+//           end else begin
+// //             $display("stage NOT valid for %d", s);
+//             stage_valid[s+1] <= 0;
+//           end
+//         end
         
         // note, had to watch out for bit reversal
         always_ff @(posedge clk or negedge rst_n) begin
-          if (stage_valid[s]) begin
-            $display("stage %d fft layer", s);
-            $display(stage_real[s]);
-            $display(stage_imag[s]);
+          if (!rst_n) begin
+            stage_valid[s+1] <= 0;
+          end
+          else if (stage_valid[s]) begin
+//             $display("stage %d fft layer", s);
+//             $display(stage_real[s]);
+//             $display(stage_imag[s]);
+            stage_valid[s+1] <= 1;
+          end
+          else begin
+            stage_valid[s+1] <= 0;
+          end
           for (int group = 0; group < (2**s); group++) begin : fft_group
             for (int pair = 0; pair < N / (2**(s+1)); pair++) begin : fft_pair
 
@@ -177,7 +185,6 @@ module Radix2FFTPipelineN8 #(
             end
           end
         end
-        end
       end
     endgenerate
 
@@ -221,11 +228,11 @@ module Radix2FFTPipelineN8 #(
           end
           highest_bin <= max_bin;
           out_valid <= 1'b1;
-          $display("highest_bin: %d", max_bin);
-          $display("highest_magnitude: %d", max_magnitude);
-          $display("stage 3! fft layer");
-          $display(stage_real[3]);
-          $display(stage_imag[3]);
+//           $display("highest_bin: %d", max_bin);
+//           $display("highest_magnitude: %d", max_magnitude);
+//           $display("stage 3! fft layer");
+//           $display(stage_real[3]);
+//           $display(stage_imag[3]);
         end else begin
 //           $display(stage_valid);
           out_valid <= 1'b0;
