@@ -1,4 +1,4 @@
-module Radix2FFTPipeline8N #(
+module Radix2FFTPipeline #(
     parameter DATA_WIDTH = 8,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 8,
@@ -58,12 +58,16 @@ module Radix2FFTPipeline8N #(
           mic_input_index <= 0;
           mic_inputting_array <= ~mic_inputting_array;
           if (mic_inputting_array) begin
-            stage_real0 <= mic_input_real1;
-            stage_imag0 <= mic_input_imag1;
+            for (int i = 0; i < N; i++) begin
+              stage_real0[i] <= mic_input_real1[i];
+              stage_imag0[i] <= mic_input_imag1[i];
+            end
           end
           else begin
-            stage_real0 <= mic_input_real0;
-            stage_imag0 <= mic_input_imag0;
+            for (int i = 0; i < N; i++) begin
+              stage_real0[i] <= mic_input_real0[i];
+              stage_imag0[i] <= mic_input_imag0[i];
+            end
           end
 //           $display("mic input 0");
 //           $display(mic_input_real[0]);
