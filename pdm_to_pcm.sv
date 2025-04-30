@@ -23,7 +23,7 @@ module pdm_to_pcm(
       // $display("index1: %d", pdm_buffer_index);
     end
     else if (pdm_buffer_index == 5000) begin
-      pcm_out = (accumulator + pdm_in) >> 5;
+      pcm_out = (accumulator + pdm_in) >> 6;
       accumulator = 0;
       valid_out = 1;
       pdm_buffer_index = 0;

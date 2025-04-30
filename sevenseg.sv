@@ -7,7 +7,11 @@ module sevenseg
 // 0123456
 
 always_ff @(posedge clock or negedge rst_n) begin
-  if (!rst_n || digit == 0) begin
+  if (!rst_n) begin
+  // output 0: ABCDEF
+    sevseg = 7'b1111110;
+  end
+  else if (digit == 0) begin
     // output 0: ABCDEF
     sevseg = 7'b1111110;
   end
@@ -40,6 +44,5 @@ always_ff @(posedge clock or negedge rst_n) begin
     sevseg = 7'b111000;
   end
 end
-
 
 endmodule : sevenseg
