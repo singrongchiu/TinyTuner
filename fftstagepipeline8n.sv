@@ -1,4 +1,4 @@
-module Radix2FFTPipeline #(
+module Radix2FFTPipeline8N #(
     parameter DATA_WIDTH = 8,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 8,
