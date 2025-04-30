@@ -1,4 +1,4 @@
-module Radix2FFTPipeline #(
+module Radix2FFTPipeline8N #(
     parameter DATA_WIDTH = 8,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 8,
@@ -34,20 +34,20 @@ module Radix2FFTPipeline #(
   // Input stage
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-          stage_valid[0] <= 0;
+//           stage_valid[0] <= 0;
           mic_input_index <= 0;
           mic_inputting_array <= 0;
         end else if (mic_input_index == N) begin
           stage_valid[0] <= 1;
-          $display("LC: STAGE SHOULD BE VALID!");
+//           $display("LC: STAGE SHOULD BE VALID!");
           mic_input_index <= 0;
           mic_inputting_array <= ~mic_inputting_array;
           stage_real[0] <= (mic_inputting_array)? mic_input_real[1] : mic_input_real[0];
           stage_imag[0] <= (mic_inputting_array)? mic_input_imag[1] : mic_input_imag[0];
-          $display("mic input 0");
-          $display(mic_input_real[0]);
-          $display("mic input 1");
-          $display(mic_input_real[1]);
+//           $display("mic input 0");
+//           $display(mic_input_real[0]);
+//           $display("mic input 1");
+//           $display(mic_input_real[1]);
           // $display(stage_real);
         end else if (in_valid) begin
           mic_input_real[mic_inputting_array][mic_input_index] <= in_real;
@@ -204,9 +204,9 @@ module Radix2FFTPipeline #(
           max_magnitude = 0;
           current_magnitude = 0;
         end else if (stage_valid[STAGES]) begin
-          $display("fft output (not bitreversed)");
-          $display(stage_real[STAGES]);
-          $display(stage_imag[STAGES]);
+//           $display("fft output (not bitreversed)");
+//           $display(stage_real[STAGES]);
+//           $display(stage_imag[STAGES]);
           
           for (int i = N-1; i > 0; i--) begin
             current_magnitude = ((stage_real[STAGES][i])*(stage_real[STAGES][i])) + ((stage_imag[STAGES][i])*(stage_imag[STAGES][i]));
@@ -228,11 +228,11 @@ module Radix2FFTPipeline #(
           end
           highest_bin <= max_bin;
           out_valid <= 1'b1;
-//           $display("highest_bin: %d", max_bin);
-//           $display("highest_magnitude: %d", max_magnitude);
-//           $display("stage 3! fft layer");
-//           $display(stage_real[3]);
-//           $display(stage_imag[3]);
+          $display("highest_bin: %d", max_bin);
+          $display("highest_magnitude: %d", max_magnitude);
+          $display("stage 3! fft layer");
+          $display(stage_real[3]);
+          $display(stage_imag[3]);
         end else begin
 //           $display(stage_valid);
           out_valid <= 1'b0;
