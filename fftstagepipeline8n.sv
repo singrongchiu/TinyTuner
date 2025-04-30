@@ -1,4 +1,4 @@
-module Radix2FFTPipeline #(
+module Radix2FFTPipeline8N #(
     parameter DATA_WIDTH = 8,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 8,
@@ -49,7 +49,7 @@ module Radix2FFTPipeline #(
   // Input stage
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-//           stage_valid[0] <= 0;
+          stage_valid0 <= 0;
           mic_input_index <= 0;
           mic_inputting_array <= 0;
         end else if (mic_input_index == N) begin
@@ -228,8 +228,8 @@ module Radix2FFTPipeline #(
           if (!rst_n) begin
             stage_valid3 <= 0;
           end
-    else if (stage_valid2) begin
-      stage_valid3 <= 1;
+          else if (stage_valid2) begin
+            stage_valid3 <= 1;
           end
           else begin
             stage_valid3 <= 0;
