@@ -1,5 +1,5 @@
 module Radix2FFTPipeline #(
-    parameter DATA_WIDTH = 16,
+    parameter DATA_WIDTH = 8,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 64,
     localparam STAGES = $clog2(N)
@@ -81,8 +81,8 @@ module Radix2FFTPipeline #(
     logic signed [DATA_WIDTH-1:0] a_imag[0:STAGES];
     logic signed [DATA_WIDTH-1:0] b_real[0:STAGES];
     logic signed [DATA_WIDTH-1:0] b_imag[0:STAGES];
-  logic signed [DATA_WIDTH-1:0] abdiff_real[0:STAGES];
-  logic signed [DATA_WIDTH-1:0] abdiff_imag[0:STAGES];
+    logic signed [DATA_WIDTH-1:0] abdiff_real[0:STAGES];
+    logic signed [DATA_WIDTH-1:0] abdiff_imag[0:STAGES];
     logic signed [DATA_WIDTH+TWIDDLE_WIDTH:0] prod_real[0:STAGES];
     logic signed [DATA_WIDTH+TWIDDLE_WIDTH:0] prod_imag[0:STAGES];
     logic signed [TWIDDLE_WIDTH-1:0] twiddle_real[N/2];
@@ -147,9 +147,9 @@ module Radix2FFTPipeline #(
         // note, had to watch out for bit reversal
         always_ff @(posedge clk or negedge rst_n) begin
           if (stage_valid[s]) begin
-//             $display("stage %d fft layer", s);
-//             $display(stage_real[s]);
-//             $display(stage_imag[s]);
+            $display("stage %d fft layer", s);
+            $display(stage_real[s]);
+            $display(stage_imag[s]);
           for (int group = 0; group < (2**s); group++) begin : fft_group
             for (int pair = 0; pair < N / (2**(s+1)); pair++) begin : fft_pair
 
@@ -179,6 +179,9 @@ module Radix2FFTPipeline #(
 //                 prod_imag[s] = (b_real[s] * twiddle_imag[twiddle_index[s]] + b_imag[s] * twiddle_real[twiddle_index[s]]) >>> (TWIDDLE_WIDTH - 1);
 //               prod_real[s] = (b_real[s] * twiddle_real[twiddle_index[s]] - b_imag[s] * twiddle_imag[twiddle_index[s]]);
 //               prod_imag[s] = (b_real[s] * twiddle_imag[twiddle_index[s]] + b_imag[s] * twiddle_real[twiddle_index[s]]);
+              
+//               prod_real[s] = (abdiff_real[s] * twiddle_real[twiddle_index[s]] - abdiff_imag[s] * twiddle_imag[twiddle_index[s]]);
+//               prod_imag[s] = (abdiff_real[s] * twiddle_imag[twiddle_index[s]] + abdiff_imag[s] * twiddle_real[twiddle_index[s]]);
               prod_real[s] = (abdiff_real[s] * twiddle_real[twiddle_index[s]] - abdiff_imag[s] * twiddle_imag[twiddle_index[s]]) >>> (TWIDDLE_WIDTH - 2);
               prod_imag[s] = (abdiff_real[s] * twiddle_imag[twiddle_index[s]] + abdiff_imag[s] * twiddle_real[twiddle_index[s]]) >>> (TWIDDLE_WIDTH - 2);
 //               $display("s %d b_real %d", s, b_real[s]);
@@ -191,10 +194,10 @@ module Radix2FFTPipeline #(
 //               $display("s %d prod_imag %d", s, prod_imag[s]);
 
                 // Butterfly
-              stage_real[s+1][idx_a[s]] <= (a_real[s] + b_real[s]);
-              stage_imag[s+1][idx_a[s]] <= (a_imag[s] + b_imag[s]);
-              stage_real[s+1][idx_b[s]] <= (prod_real[s]);
-              stage_imag[s+1][idx_b[s]] <= (prod_imag[s]);
+              stage_real[s+1][idx_a[s]] <= (a_real[s] + b_real[s]) >>> 1;
+              stage_imag[s+1][idx_a[s]] <= (a_imag[s] + b_imag[s]) >>> 1;
+              stage_real[s+1][idx_b[s]] <= (prod_real[s]) >>> 1;
+              stage_imag[s+1][idx_b[s]] <= (prod_imag[s]) >>> 1;
 //               stage_real[s+1][group * (2**(s+1)) + pair] <= a_real[s][group] + prod_real[s];
 //               stage_imag[s+1][group * (2**(s+1)) + pair] <= a_imag[s][group] + prod_imag[s];
 //               stage_real[s+1][group * (2**(s+1)) + pair + (2**s)] <= a_real[s][group] - prod_real[s];
