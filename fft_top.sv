@@ -102,7 +102,7 @@ module pdm_to_pcm#(
 endmodule : pdm_to_pcm
 
 module Radix2FFTPipeline8N #(
-    parameter DATA_WIDTH = 6,
+    parameter DATA_WIDTH = 8,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 8,
     localparam STAGES = $clog2(N)
@@ -223,12 +223,12 @@ module Radix2FFTPipeline8N #(
   logic signed [DATA_WIDTH-1:0] b_imag2;
 //     logic signed [DATA_WIDTH-1:0] abdiff_real[0:STAGES];
 //     logic signed [DATA_WIDTH-1:0] abdiff_imag[0:STAGES];
-  logic signed [DATA_WIDTH-1:0] abdiff_real0;
-  logic signed [DATA_WIDTH-1:0] abdiff_real1;
-  logic signed [DATA_WIDTH-1:0] abdiff_real2;
-  logic signed [DATA_WIDTH-1:0] abdiff_imag0;
-  logic signed [DATA_WIDTH-1:0] abdiff_imag1;
-  logic signed [DATA_WIDTH-1:0] abdiff_imag2;
+  logic signed [DATA_WIDTH:0] abdiff_real0;
+  logic signed [DATA_WIDTH:0] abdiff_real1;
+  logic signed [DATA_WIDTH:0] abdiff_real2;
+  logic signed [DATA_WIDTH:0] abdiff_imag0;
+  logic signed [DATA_WIDTH:0] abdiff_imag1;
+  logic signed [DATA_WIDTH:0] abdiff_imag2;
     logic signed [DATA_WIDTH+TWIDDLE_WIDTH:0] prod_real[STAGES-1:0];
     logic signed [DATA_WIDTH+TWIDDLE_WIDTH:0] prod_imag[STAGES-1:0];
     logic signed [TWIDDLE_WIDTH-1:0] twiddle_real[N/2];
@@ -242,10 +242,11 @@ module Radix2FFTPipeline8N #(
   
 //     generate
 //       for (genvar s = 0; s < STAGES; s++) begin : fft_stage
-       
-  function automatic signed [11:0] simple_mult;  // 6b * 6b = 12b
-    input signed [5:0] a;
-    input signed [5:0] b;
+    
+  /*
+  function automatic signed [DATA_WIDTH+TWIDDLE_WIDTH-1:0] simple_mult; 
+    input signed [DATA_WIDTH-1:0] a;
+    input signed [TWIDDLE_WIDTH-1:0] b;
     begin
         simple_mult = 
             (b[0] ? a       : 0) +
@@ -253,8 +254,30 @@ module Radix2FFTPipeline8N #(
             (b[2] ? a << 2  : 0) +
             (b[3] ? a << 3  : 0) +
             (b[4] ? a << 4  : 0) +
-            (b[5] ? a << 5  : 0);
+            (b[5] ? a << 5  : 0) +
+            (b[6] ? a << 6  : 0) +
+            (b[7] ? a << 7  : 0);
     end
+  endfunction
+  */
+  function automatic signed [15:0] simple_mult(
+    input signed [7:0] a,
+    input signed [7:0] b
+  );
+      logic signed [15:0] pp0, pp1, pp2, pp3, pp4, pp5, pp6, pp7;
+  begin
+      // parallel partial products
+    pp0 = b[0] ? { {8{a[7]}}, a }         : 16'b0;  // sign-extended a << 0
+      pp1 = b[1] ? { {7{a[7]}}, a, 1'b0 }   : 16'b0;  // a << 1
+      pp2 = b[2] ? { {6{a[7]}}, a, 2'b00 }  : 16'b0;  // a << 2
+      pp3 = b[3] ? { {5{a[7]}}, a, 3'b000 } : 16'b0;  // a << 3
+      pp4 = b[4] ? { {4{a[7]}}, a, 4'b0000 } : 16'b0; // a << 4
+      pp5 = b[5] ? { {3{a[7]}}, a, 5'b00000 } : 16'b0;
+      pp6 = b[6] ? { {2{a[7]}}, a, 6'b000000 } : 16'b0;
+      pp7 = b[7] ? { {1{a[7]}}, a, 7'b0000000 } : 16'b0; // a << 7
+
+      simple_mult = pp0 + pp1 + pp2 + pp3 + pp4 + pp5 + pp6 + pp7;
+  end
   endfunction
 
   ///// STAGE 1
@@ -294,8 +317,7 @@ module Radix2FFTPipeline8N #(
               $display("abdiff_real0 %d", abdiff_real0);
               $display("abdiff_imag0 %d", abdiff_imag0);
               */
-
-
+               
               prod_real[0] = (abdiff_real0 * twiddle_real[twiddle_index[0]] - abdiff_imag0 * twiddle_imag[twiddle_index[0]]) >>> (TWIDDLE_WIDTH - 2);
               prod_imag[0] = (abdiff_real0 * twiddle_imag[twiddle_index[0]] + abdiff_imag0 * twiddle_real[twiddle_index[0]]) >>> (TWIDDLE_WIDTH - 2);
 
@@ -314,8 +336,8 @@ module Radix2FFTPipeline8N #(
 //       end
 //     endgenerate
 
-         logic signed [DATA_WIDTH-1:0] temp_real1;
-        logic signed [DATA_WIDTH-1:0] temp_real2;
+  logic signed [DATA_WIDTH*2:0] temp_real1;
+  logic signed [DATA_WIDTH*2:0] temp_imag1;
   
   ////// STAGE 2
       always_ff @(posedge clk or posedge reset) begin
@@ -323,36 +345,54 @@ module Radix2FFTPipeline8N #(
             stage_valid2 <= 0;
           end
         else if (stage_valid1) begin
+          /*
+          $display("stage %d", 1);
+          $display(stage_real1);
+          $display(stage_imag1); 
+          */
           stage_valid2 <= 1;
           for (int group = 0; group < 2; group++) begin : fft_group
             for (int pair = 0; pair < 2; pair++) begin : fft_pair
 
                 // Calculate indices
-              idx_a1 = (group << 2) + pair;
+            idx_a1 = (group << 2) + pair;
             idx_b1 = idx_a1 + (N >> (1+1));
-            twiddle_index[1] = pair << 1;
+              twiddle_index[1] = pair << 1;
+    //          $display("idx_a1: %d", idx_a1);
+      //        $display("idx_b1: %d", idx_b1);
 
                 // Read inputs
             a_real1 = stage_real1[idx_a1];
             a_imag1 = stage_imag1[idx_a1];
             b_real1 = stage_real1[idx_b1];
             b_imag1 = stage_imag1[idx_b1];
-              abdiff_real1 = stage_real1[idx_a1] - stage_real1[idx_b1];
-              abdiff_imag1 = stage_imag1[idx_a1] - stage_imag1[idx_b1];
+            abdiff_real1 = stage_real1[idx_a1] - stage_real1[idx_b1];
+            abdiff_imag1 = stage_imag1[idx_a1] - stage_imag1[idx_b1];
               
               
-              temp_real1 = simple_mult(abdiff_real1, twiddle_real[twiddle_index[1]]) - 
-                   simple_mult(abdiff_imag1, twiddle_imag[twiddle_index[1]]);
+              
+            temp_real1 = simple_mult(abdiff_real1, twiddle_real[twiddle_index[1]]) - simple_mult(abdiff_imag1, twiddle_imag[twiddle_index[1]]);
         
-        temp_imag1 = simple_mult(abdiff_real1, twiddle_imag[twiddle_index[1]]) + 
-                   simple_mult(abdiff_imag1, twiddle_real[twiddle_index[1]]);
-        
+              temp_imag1 = simple_mult(twiddle_imag[twiddle_index[1]], abdiff_real1) + simple_mult(twiddle_real[twiddle_index[1]], abdiff_imag1);
+              /*
+              $display("twiddle");
+              $display(twiddle_real[twiddle_index[1]]);
+              $display(twiddle_imag[twiddle_index[1]]);
+              $display("temp!");
+              $display(temp_real1);
+              $display(temp_imag1);
+              */
         // Apply scaling
-        prod_real[1] = temp_real1 >>> (TWIDDLE_WIDTH - 2);
-        prod_imag[1] = temp_imag1 >>> (TWIDDLE_WIDTH - 2);
-
-        //    prod_real[1] = (abdiff_real1 * twiddle_real[twiddle_index[1]] - abdiff_imag1 * twiddle_imag[twiddle_index[1]]) >>> (TWIDDLE_WIDTH - 2);
-        //    prod_imag[1] = (abdiff_real1 * twiddle_imag[twiddle_index[1]] + abdiff_imag1 * twiddle_real[twiddle_index[1]]) >>> (TWIDDLE_WIDTH - 2);
+              prod_real[1] = temp_real1 >>> (TWIDDLE_WIDTH - 2);
+              prod_imag[1] = temp_imag1 >>> (TWIDDLE_WIDTH - 2);  
+              /*
+              $display("prod!");
+              $display(prod_real[1]);
+              $display(prod_imag[1]); */
+              
+              
+  //        prod_real[1] = (abdiff_real1 * twiddle_real[twiddle_index[1]] - abdiff_imag1 * twiddle_imag[twiddle_index[1]]) >>> (TWIDDLE_WIDTH - 2);
+  //        prod_imag[1] = (abdiff_real1 * twiddle_imag[twiddle_index[1]] + abdiff_imag1 * twiddle_real[twiddle_index[1]]) >>> (TWIDDLE_WIDTH - 2);
 
                 // Butterfly
             stage_real2[idx_a1] <= (a_real1 + b_real1) >>> 1;
@@ -374,6 +414,11 @@ module Radix2FFTPipeline8N #(
             stage_valid3 <= 0;
           end
     else if (stage_valid2) begin
+      /*
+      $display("stage %d", 2);
+      $display(stage_real2);
+      $display(stage_imag2); 
+      */
       stage_valid3 <= 1;
       for (int group = 0; group < (4); group++) begin : fft_group
       for (int pair = 0; pair < N / (8); pair++) begin : fft_pair
