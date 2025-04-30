@@ -599,12 +599,11 @@ module fft_top (
   input clk,          // System clock
   input pdm_in,       // PDM microphone output
   input reset,
-  output logic mic_clk,
   output logic [6:0] sevseg,
   output logic [7:0] led,
   output logic slowerclk
 );
-parameter DATA_WIDTH = 6;
+parameter DATA_WIDTH = 8;
 /*
   input clkin, // 25 MHz, 0 deg
   output clkout0, // 5 MHz, 0 deg
