@@ -16,7 +16,7 @@ I decided to pipeline the FFT by stage (which would make it slower than pipeline
 I was only able to fit an N = 8 point FFT on my FPGA board due to limited hardware resources. When we have 8 points for an FFT, we divide the sampling frequency into 8 bins. This which wouldn't allow us to tell the exact note because in lower frequencies, notes can be only differentiated by a few tens of Hz.   
 
 ### FFT Implementation
-I decided to implement the version of Radix-2 FFT that does bit reversing at the end, instead of having to change the indices of my mic inputs at the start for easier implementation and faster logic. The FFT is done iteratively through log2(N) stages and butterfly operations that occur at every stage.   
+I decided to implement the version of Radix-2 FFT that does bit reversing at the end, instead of having to change the indices of my mic inputs at the start for easier implementation and faster logic. The FFT is done iteratively through log2(N) stages and butterfly operations that occur at every stage. Twiddle Factors (roots of unity), or the weights that are multiplied at each butterfly operation were generated using the file twiddlegenerate.py.
 
 ## Testing
 N = 64 point FFT working shown in the following testbench: 
