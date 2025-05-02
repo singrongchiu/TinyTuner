@@ -1,5 +1,5 @@
 module Radix2FFTPipeline #(
-    parameter DATA_WIDTH = 8,
+    parameter DATA_WIDTH = 16,
     parameter TWIDDLE_WIDTH = 8,
     parameter N = 64,
     localparam STAGES = $clog2(N)
@@ -53,7 +53,7 @@ module Radix2FFTPipeline #(
           mic_input_real[mic_inputting_array][mic_input_index] <= in_real;
           mic_input_imag[mic_inputting_array][mic_input_index] <= in_imag;
           mic_input_index <= mic_input_index + 1;
-          $display("inputted one!");
+//           $display("inputted one!");
         end
     end
   
@@ -194,10 +194,10 @@ module Radix2FFTPipeline #(
 //               $display("s %d prod_imag %d", s, prod_imag[s]);
 
                 // Butterfly
-              stage_real[s+1][idx_a[s]] <= (a_real[s] + b_real[s]) >>> 1;
-              stage_imag[s+1][idx_a[s]] <= (a_imag[s] + b_imag[s]) >>> 1;
-              stage_real[s+1][idx_b[s]] <= (prod_real[s]) >>> 1;
-              stage_imag[s+1][idx_b[s]] <= (prod_imag[s]) >>> 1;
+              stage_real[s+1][idx_a[s]] <= (a_real[s] + b_real[s]);
+              stage_imag[s+1][idx_a[s]] <= (a_imag[s] + b_imag[s]);
+              stage_real[s+1][idx_b[s]] <= (prod_real[s]);
+              stage_imag[s+1][idx_b[s]] <= (prod_imag[s]);
 //               stage_real[s+1][group * (2**(s+1)) + pair] <= a_real[s][group] + prod_real[s];
 //               stage_imag[s+1][group * (2**(s+1)) + pair] <= a_imag[s][group] + prod_imag[s];
 //               stage_real[s+1][group * (2**(s+1)) + pair + (2**s)] <= a_real[s][group] - prod_real[s];
