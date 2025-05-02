@@ -2,6 +2,7 @@
 
 // Code your design here
 
+/*
 // diamond 3.7 accepts this PLL
 // diamond 3.8-3.9 is untested
 // diamond 3.10 or higher is likely to abort with error about unable to use feedback signal
@@ -47,6 +48,30 @@ EHXPLLL #(
         .ENCLKOP(1'b0),
         .LOCK(locked)
 	);
+endmodule : slowerclk
+*/
+module slowerclk
+(
+    input clkin, // 30 MHz, 0 deg
+    output clkout0, // 5 MHz, 0 deg
+    output locked
+);
+logic [7:0] counter;
+always_ff @(posedge clkin) begin
+  if (counter == 3) begin
+    clkout0 <= 0;
+    counter <= counter + 1;
+  end
+  else if (counter == 6) begin
+    clkout0 <= 1;
+    counter <= 0;
+  end
+  else begin
+    counter <= counter + 1;
+  end
+end
+assign locked = 1;
+
 endmodule : slowerclk
 
 module pdm_to_pcm#(
